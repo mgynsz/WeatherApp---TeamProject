@@ -31,6 +31,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var jh = "임재현"
     var jh3 = "임재현"
     var jh2 = "임재현"
+    var jh3 = "임재현"
     var jy: String?
     var hs = "표현수"
     var jh: String?

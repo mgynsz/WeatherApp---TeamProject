@@ -1,1 +1,1 @@
-# WeatherApp---TeamProject
+# WeatherApp-TeamProject

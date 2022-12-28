@@ -28,7 +28,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //    var weather: Weather?
     //    var main: Main?
     //    var name: String?
-    
+    var jh = "임재현"
     var jy: String?
     var hs = "표현수"
     var jh: String?

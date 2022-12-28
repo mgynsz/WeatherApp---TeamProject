@@ -29,7 +29,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //    var main: Main?
     //    var name: String?
     
-    
+    var jy: String?
     //서울의 좌표
     let seoul = CLLocation(latitude: 37.5666, longitude: 126.9784)
     //날씨 데이터 저장

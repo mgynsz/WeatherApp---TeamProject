@@ -28,14 +28,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //    var weather: Weather?
     //    var main: Main?
     //    var name: String?
-    var y = "dasd"
+    var y = "yellow"
     var tt = "ttttt"
     var jj = "rrr"
     
     var jh = "임재현"
     var jh3 = "임재현"
     var jh2 = "임재현"
+<<<<<<< HEAD
     var jh33 = "임재현"
+=======
+>>>>>>> parent of c855856 (123)
     var jy: String?
     var hs = "표현수"
     var jhj: String?

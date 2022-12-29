@@ -28,7 +28,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //    var weather: Weather?
     //    var main: Main?
     //    var name: String?
-   var mGyn = "민균,예나,수진"
+
+    var str = "이걸 추가했습니다."
     
     //서울의 좌표
     let seoul = CLLocation(latitude: 37.5666, longitude: 126.9784)
@@ -166,7 +167,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             cell.weekWeatherImage.image = UIImage(named: self.weekWeatherSymbolArray[indexPath.row])
             cell.tempProgressView.progress = 0.5 + Float((self.weekWeatherMaxTempArray[indexPath.row] + self.weekWeatherMinTempArray[indexPath.row])) / 100.0
         }
-            
+        
         return cell
     }
 }

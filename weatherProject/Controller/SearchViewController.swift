@@ -36,7 +36,6 @@ class SearchViewController: UIViewController {
         
         view.addSubview(searchBar)
     }
-}
 
 extension SearchViewController: SearchResultDelegate {
     func foundResult(mapItem: MKMapItem) {
@@ -44,8 +43,7 @@ extension SearchViewController: SearchResultDelegate {
         print(mapItem.placemark.country ?? "")
         print(mapItem.placemark.coordinate.latitude)
         print(mapItem.placemark.coordinate.longitude)
-        
-        
+                
         // clear search phrase
         searchController.searchBar.text = ""
     }

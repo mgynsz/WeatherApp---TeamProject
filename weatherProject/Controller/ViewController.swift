@@ -22,17 +22,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var otherOptionView: UIView!
     //테이블뷰
     @IBOutlet weak var weekWeatherTableView: UITableView!
-    
-    
-    //    // 받아온 데이터를 저장할 프로퍼티
-    //    var weather: Weather?
-    //    var main: Main?
-    //    var name: String?
 
-    var str = "이걸 추가했습니다."
+    
     
     //서울의 좌표
-    let seoul = CLLocation(latitude: 37.5666, longitude: 126.9784)
+    var seoul = CLLocation(latitude: 37.5666, longitude: 126.9784)
     //날씨 데이터 저장
     var weather: Weather?
     //10일간 최고 최저 온도
@@ -129,6 +123,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @objc func otherOptionViewTapped(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "showSearchView", sender: sender)
     }
+    
+    @IBAction func addButtonTapped(_ sender: Any) {
+        let vc = CustomPageViewController()
+        
+        vc.addArray.append(PageDetailViewController.getInstance())
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 class WeekWeatherTableViewCell: UITableViewCell {

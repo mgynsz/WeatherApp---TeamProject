@@ -63,7 +63,6 @@
 		457299E529593C0200D7DF1E /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				4530FFD129582863001AA849 /* SearchController.swift */,
 				4530FFD32958287E001AA849 /* SearchResultCell.swift */,
 				4530FFD529582895001AA849 /* SearchResultDelegate.swift */,
 				4530FFD7295828AC001AA849 /* MKMapItem+Extension.swift */,
@@ -79,6 +78,7 @@
 				452C1871292E335B00E6FDC1 /* CalenderViewController.swift */,
 				45B9385A293DE11900051488 /* CurrentWeatherViewController.swift */,
 				4530FFCF29582673001AA849 /* SearchViewController.swift */,
+				4530FFD129582863001AA849 /* SearchController.swift */,
 				457CBC04295BDD7100E9A568 /* PageDetailViewController.swift */,
 				457CBC06295BDD9500E9A568 /* CustomPageViewController.swift */,
 				452FB1F8295BECE50087A8D7 /* weatherData.swift */,

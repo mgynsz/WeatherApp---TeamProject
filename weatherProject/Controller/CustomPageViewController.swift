@@ -10,6 +10,7 @@ import UIKit
 class CustomPageViewController: UIPageViewController, UIPageViewControllerDelegate {
     
     var individualPageViewControllerList = [UIViewController]()
+    var addArray = [UIViewController]()
     let pageControl = UIPageControl()
     
     // 페이지컨트롤 인디케이터 상세 설정
@@ -19,29 +20,27 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
             if view is UIPageControl{
                 (view as! UIPageControl).currentPageIndicatorTintColor = .black
                 (view as! UIPageControl).pageIndicatorTintColor = .gray
-                (view as! UIPageControl).setIndicatorImage(UIImage(systemName: "plus"), forPage: 0)
-                (view as! UIPageControl).currentPage = 1
+//                (view as! UIPageControl).setIndicatorImage(UIImage(systemName: "plus"), forPage: 0)
+                (view as! UIPageControl).currentPage = 0
             }
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.dataSource = self
         self.delegate = self
-
+        
+        individualPageViewControllerList = addArray
         weatherCard()
     }
     
     // 현재 날씨 카드
     func weatherCard() {
-        individualPageViewControllerList = [
-            PageDetailViewController.getInstance(index: 0),
-            PageDetailViewController.getInstance(index: 1)
-        ]
-        setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true, completion: nil)
-
+        individualPageViewControllerList.append(PageDetailViewController.getInstance())
+        setViewControllers([individualPageViewControllerList[0]], direction: .forward, animated: true, completion: nil)
     }
 }
 

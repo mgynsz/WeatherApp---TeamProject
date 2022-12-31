@@ -55,8 +55,7 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
     //강수량
     var precipitation: Int = 0
     
-    var index: Int = 0          // 현재 날씨 카드
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -256,10 +255,10 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    static func getInstance(index: Int) -> PageDetailViewController {
+    static func getInstance() -> PageDetailViewController {
 
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageDetailViewController") as! PageDetailViewController
-        vc.index = index
+        
         return vc
     }
 }

@@ -20,7 +20,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="weatherProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="weatherProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -268,20 +268,11 @@
                                                     <segue destination="euE-tN-fzT" kind="embed" identifier="showPageView" id="gwB-fB-vRS"/>
                                                 </connections>
                                             </containerView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kQe-F1-kJx">
-                                                <rect key="frame" x="340.5" y="476" width="53.5" height="35"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="추가"/>
-                                                <connections>
-                                                    <action selector="addButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oI7-ul-QUn"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
                                             <constraint firstItem="O5H-52-pQL" firstAttribute="leading" secondItem="clU-zm-92e" secondAttribute="leading" constant="20" id="1VX-TQ-Vlk"/>
                                             <constraint firstAttribute="height" priority="250" constant="818" id="2jb-v7-Q0K"/>
-                                            <constraint firstItem="fD5-t7-Dsf" firstAttribute="top" secondItem="kQe-F1-kJx" secondAttribute="bottom" constant="0.5" id="BiP-no-fcY"/>
                                             <constraint firstItem="O5H-52-pQL" firstAttribute="top" secondItem="clU-zm-92e" secondAttribute="top" constant="32" id="JhI-7f-b4l"/>
                                             <constraint firstAttribute="trailing" secondItem="kJT-kJ-Lbl" secondAttribute="trailing" constant="20" id="Jl0-pP-ZRe"/>
                                             <constraint firstItem="Qed-ge-8YX" firstAttribute="leading" secondItem="clU-zm-92e" secondAttribute="leading" constant="20" id="KaZ-5B-WAe"/>
@@ -292,9 +283,7 @@
                                             <constraint firstAttribute="trailing" secondItem="O5H-52-pQL" secondAttribute="trailing" constant="20" id="Ssg-iw-2ac"/>
                                             <constraint firstItem="fD5-t7-Dsf" firstAttribute="leading" secondItem="clU-zm-92e" secondAttribute="leading" constant="20" id="TF7-Ym-C5b"/>
                                             <constraint firstAttribute="bottom" secondItem="fD5-t7-Dsf" secondAttribute="bottom" constant="24" id="WWQ-yR-3MG"/>
-                                            <constraint firstAttribute="trailing" secondItem="kQe-F1-kJx" secondAttribute="trailing" constant="20" id="ckv-Ic-S3u"/>
                                             <constraint firstItem="9WB-6N-BYQ" firstAttribute="top" secondItem="Qed-ge-8YX" secondAttribute="bottom" constant="12" id="gKE-yJ-RpB"/>
-                                            <constraint firstItem="kQe-F1-kJx" firstAttribute="top" secondItem="Qed-ge-8YX" secondAttribute="bottom" constant="4.5" id="mP6-1g-24I"/>
                                             <constraint firstAttribute="trailing" secondItem="fD5-t7-Dsf" secondAttribute="trailing" constant="20" id="o9W-mK-ICY"/>
                                             <constraint firstItem="kJT-kJ-Lbl" firstAttribute="top" secondItem="O5H-52-pQL" secondAttribute="bottom" constant="20" id="peP-hE-TZy"/>
                                             <constraint firstItem="fD5-t7-Dsf" firstAttribute="top" secondItem="9WB-6N-BYQ" secondAttribute="bottom" constant="8" id="vSl-bR-CGU"/>
@@ -1304,7 +1293,7 @@
         <!--Calender View Controller-->
         <scene sceneID="Sh3-WA-n7i">
             <objects>
-                <viewController id="1Ph-NK-gqh" customClass="CalenderViewController" customModule="weatherProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalenderViewController" id="1Ph-NK-gqh" customClass="CalenderViewController" customModule="weatherProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="isQ-Fh-R8p">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

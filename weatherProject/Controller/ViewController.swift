@@ -123,14 +123,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @objc func otherOptionViewTapped(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "showSearchView", sender: sender)
     }
-    
-    @IBAction func addButtonTapped(_ sender: Any) {
-        let vc = CustomPageViewController()
-        
-        vc.addArray.append(PageDetailViewController.getInstance())
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
 }
 
 class WeekWeatherTableViewCell: UITableViewCell {

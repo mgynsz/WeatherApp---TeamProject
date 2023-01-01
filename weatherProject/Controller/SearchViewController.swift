@@ -10,6 +10,7 @@ import MapKit
 
 class SearchViewController: UIViewController {
     
+    
     var searchController: UISearchController!
     
     override func viewDidLoad() {
@@ -36,6 +37,7 @@ class SearchViewController: UIViewController {
         
         view.addSubview(searchBar)
     }
+}
 
 extension SearchViewController: SearchResultDelegate {
     func foundResult(mapItem: MKMapItem) {

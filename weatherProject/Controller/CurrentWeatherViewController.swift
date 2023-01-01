@@ -123,7 +123,7 @@ class CurrentWeatherViewController: UIViewController {
         
         //오늘 날짜 표시
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy년 MM월 d일 (E)"
+        formatter.dateFormat = "MM월 d일 (E)"
         weatherDateLabel.text = formatter.string(from: Date())
         
         weatherRegionLabel.text = "서울"

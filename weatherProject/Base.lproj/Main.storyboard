@@ -1314,6 +1314,14 @@
                                     <action selector="selectButtonTapped:" destination="1Ph-NK-gqh" eventType="touchUpInside" id="BCz-x2-q5w"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmT-Qt-B7e">
+                                <rect key="frame" x="340" y="68" width="54" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="추가"/>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="1Ph-NK-gqh" eventType="touchUpInside" id="7rr-kC-gur"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UQZ-nn-miO"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1323,7 +1331,9 @@
                             <constraint firstItem="leY-TK-tLE" firstAttribute="top" secondItem="OrJ-bD-RyC" secondAttribute="bottom" constant="4" id="BFB-dY-ASC"/>
                             <constraint firstItem="OrJ-bD-RyC" firstAttribute="top" secondItem="UQZ-nn-miO" secondAttribute="top" constant="20" id="SsD-2S-bPl"/>
                             <constraint firstItem="leY-TK-tLE" firstAttribute="centerX" secondItem="isQ-Fh-R8p" secondAttribute="centerX" id="U0J-3S-nLH"/>
+                            <constraint firstItem="UQZ-nn-miO" firstAttribute="trailing" secondItem="VmT-Qt-B7e" secondAttribute="trailing" constant="20" id="X9c-t4-Avi"/>
                             <constraint firstItem="leY-TK-tLE" firstAttribute="leading" secondItem="UQZ-nn-miO" secondAttribute="leading" constant="36" id="YMb-Kl-JSP"/>
+                            <constraint firstItem="VmT-Qt-B7e" firstAttribute="top" secondItem="UQZ-nn-miO" secondAttribute="top" constant="20" id="eYi-Xp-rQE"/>
                             <constraint firstItem="UQZ-nn-miO" firstAttribute="trailing" secondItem="leY-TK-tLE" secondAttribute="trailing" constant="36" id="vdd-je-W0v"/>
                         </constraints>
                     </view>
@@ -1334,7 +1344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="006-kr-d0U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1616" y="-231"/>
+            <point key="canvasLocation" x="1615.9420289855075" y="-231.02678571428569"/>
         </scene>
         <!--Page Detail View Controller-->
         <scene sceneID="AK6-By-CP8">

@@ -32,12 +32,24 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         self.delegate = self
         
         weatherCard()
+        addNotiObserver()
     }
 
     // 현재 날씨 카드
     func weatherCard() {
         individualPageViewControllerList.append(PageDetailViewController.getInstance())
         setViewControllers([individualPageViewControllerList[0]], direction: .forward, animated: true, completion: nil)
+    }
+    
+    private func addNotiObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(addVC), name: NSNotification.Name("addVC"), object: nil)
+    }
+    
+    @objc func addVC(notification: NSNotification) {
+        if let Array = notification.object as? [UIViewController] {
+            individualPageViewControllerList = Array
+            setViewControllers([individualPageViewControllerList[0]], direction: .forward, animated: true, completion: nil)
+        }
     }
 }
 

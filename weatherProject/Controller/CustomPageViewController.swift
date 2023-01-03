@@ -19,8 +19,8 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
             if view is UIPageControl{
                 (view as! UIPageControl).currentPageIndicatorTintColor = .black
                 (view as! UIPageControl).pageIndicatorTintColor = .gray
-//                (view as! UIPageControl).setIndicatorImage(UIImage(systemName: "plus"), forPage: 0)
-                (view as! UIPageControl).currentPage = 0
+                (view as! UIPageControl).setIndicatorImage(UIImage(systemName: "plus"), forPage: 0)
+                (view as! UIPageControl).currentPage = 1
             }
         }
     }
@@ -34,11 +34,12 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         weatherCard()
         addNotiObserver()
     }
-
+    
     // 현재 날씨 카드
     func weatherCard() {
+        individualPageViewControllerList.append(AddWeatherCardViewController.getInstance())
         individualPageViewControllerList.append(PageDetailViewController.getInstance())
-        setViewControllers([individualPageViewControllerList[0]], direction: .forward, animated: true, completion: nil)
+        setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true, completion: nil)
     }
     
     private func addNotiObserver() {
@@ -46,9 +47,10 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     }
     
     @objc func addVC(notification: NSNotification) {
-        if let Array = notification.object as? [UIViewController] {
-            individualPageViewControllerList = Array
-            setViewControllers([individualPageViewControllerList[0]], direction: .forward, animated: true, completion: nil)
+        if let addString = notification.object as? String {
+            print(addString)
+            individualPageViewControllerList.insert(PageDetailViewController.getInstance(), at: individualPageViewControllerList.endIndex - 1)
+            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
         }
     }
 }

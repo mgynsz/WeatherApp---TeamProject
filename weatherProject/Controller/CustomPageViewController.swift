@@ -49,7 +49,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     @objc func addVC(notification: NSNotification) {
         if let addString = notification.object as? String {
             print(addString)
-            individualPageViewControllerList.insert(PageDetailViewController.getInstance(), at: individualPageViewControllerList.endIndex - 1)
+            individualPageViewControllerList.insert(PageDetailViewController.getInstance(), at: individualPageViewControllerList.endIndex)
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
         }
     }

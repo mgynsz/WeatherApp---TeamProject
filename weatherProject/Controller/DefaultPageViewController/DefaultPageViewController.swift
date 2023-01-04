@@ -1,15 +1,15 @@
 //
-//  PageDetailViewController.swift
+//  File.swift
 //  weatherProject
 //
-//  Created by 표현수 on 2022/12/28.
+//  Created by 표현수 on 2023/01/04.
 //
 
 import UIKit
 import WeatherKit
 import CoreLocation
 
-class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
+class DefaultPageViewController: UIViewController, CLLocationManagerDelegate {
     
     //현재 날씨
     @IBOutlet weak var weatherView: UIView!
@@ -137,7 +137,7 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM월 d일 (E)"
         weatherDateLabel.text = formatter.string(from: Date())
-        weatherRegionLabel.text = "서울"
+        weatherRegionLabel.text = "나의 위치"
 
         weatherLabel.text = self.currentWeatherCondition
         //현재온도
@@ -152,13 +152,13 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
     
     //현재 날씨 뷰를 눌렀을 때
     @objc func weatherViewTapped(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: "showCurrentWeatherView", sender: sender)
+        performSegue(withIdentifier: "showDefaultCurrentWeatherView", sender: sender)
     }
     
     //currnetViewController로 데이터 전송
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showCurrentWeatherView" {
-            guard let vc = segue.destination as? CurrentWeatherViewController else { return }
+        if segue.identifier == "showDefaultCurrentWeatherView" {
+            guard let vc = segue.destination as? DefaultCurrentWeatherViewController else { return }
             vc.currentWeatherCondition = self.currentWeatherCondition
             vc.hourWeatherTempArray = self.hourWeatherTempArray
             vc.weekWeatherSymbolArray = self.weekWeatherSymbolArray
@@ -256,9 +256,9 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    static func getInstance() -> PageDetailViewController {
+    static func getInstance() -> DefaultPageViewController {
 
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageDetailViewController") as! PageDetailViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DefaultPageViewController") as! DefaultPageViewController
         
         return vc
     }

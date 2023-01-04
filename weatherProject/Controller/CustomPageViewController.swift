@@ -33,12 +33,13 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         
         weatherCard()
         addNotiObserver()
+        delNotiObserver()
     }
     
     // 현재 날씨 카드
     func weatherCard() {
         individualPageViewControllerList.append(AddWeatherCardViewController.getInstance())
-        individualPageViewControllerList.append(PageDetailViewController.getInstance())
+        individualPageViewControllerList.append(DefaultPageViewController.getInstance())
         setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true, completion: nil)
     }
     
@@ -46,10 +47,22 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         NotificationCenter.default.addObserver(self, selector: #selector(addVC), name: NSNotification.Name("addVC"), object: nil)
     }
     
+    private func delNotiObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(delVC), name: NSNotification.Name("delVC"), object: nil)
+    }
+    
     @objc func addVC(notification: NSNotification) {
         if let addString = notification.object as? String {
             print(addString)
             individualPageViewControllerList.insert(PageDetailViewController.getInstance(), at: individualPageViewControllerList.endIndex)
+            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
+        }
+    }
+    
+    @objc func delVC(notification: NSNotification) {
+        if let addString = notification.object as? Int {
+            print(addString)
+            individualPageViewControllerList.remove(at: individualPageViewControllerList.endIndex - 1)
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
         }
     }

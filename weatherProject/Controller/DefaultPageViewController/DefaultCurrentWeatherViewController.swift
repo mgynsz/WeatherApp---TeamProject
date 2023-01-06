@@ -1,11 +1,14 @@
-
-
-
+//
+//  DefaultCurrentWeatherViewController.swift
+//  weatherProject
+//
+//  Created by 표현수 on 2023/01/04.
+//
 
 import UIKit
 
 
-class CurrentWeatherViewController: UIViewController {
+class DefaultCurrentWeatherViewController: UIViewController {
     
     
     //가장 기본 뷰
@@ -120,7 +123,7 @@ class CurrentWeatherViewController: UIViewController {
         formatter.dateFormat = "MM월 d일 (E)"
         weatherDateLabel.text = formatter.string(from: Date())
         
-        weatherRegionLabel.text = "서울"
+        weatherRegionLabel.text = "나의 위치"
     }
     
     //현재 온도 세팅
@@ -277,25 +280,10 @@ class CurrentWeatherViewController: UIViewController {
     @IBAction func backButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
-    
-    var delVCNum: Int = 0
-    
-    @IBAction func deleteButtonTapped(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Notification.Name("delVC"), object: delVCNum)
-        self.dismiss(animated: true)
-    }
-}
-
-//컬렉션뷰 클래스 설정
-class WeatherCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var weatherCollectionImage: UIImageView!
-    @IBOutlet weak var weatherCollectionDate: UILabel!
-    @IBOutlet weak var weatherCollectionTemp: UILabel!
 }
 
 //컬렉션뷰 설정
-extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension DefaultCurrentWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //컬랙션뷰 셀 갯수 설정
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 24
@@ -325,7 +313,7 @@ extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionVi
 }
 
 //테이블뷰 설정
-extension CurrentWeatherViewController: UITableViewDelegate, UITableViewDataSource {
+extension DefaultCurrentWeatherViewController: UITableViewDelegate, UITableViewDataSource {
     //테이블뷰 셀 갯수 설정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class CustomPageViewController: UIPageViewController, UIPageViewControllerDelegate {
     
@@ -27,7 +28,8 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        self.dataSource = nil
         self.dataSource = self
         self.delegate = self
         
@@ -54,7 +56,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     @objc func addVC(notification: NSNotification) {
         if let addString = notification.object as? String {
             print(addString)
-            individualPageViewControllerList.insert(PageDetailViewController.getInstance(), at: individualPageViewControllerList.endIndex)
+            individualPageViewControllerList.append(PageDetailViewController.getInstance())
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
         }
     }
@@ -62,7 +64,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     @objc func delVC(notification: NSNotification) {
         if let addString = notification.object as? Int {
             print(addString)
-            individualPageViewControllerList.remove(at: individualPageViewControllerList.endIndex - 1)
+            individualPageViewControllerList.remove(at: individualPageViewControllerList.count - 1)
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
         }
     }
@@ -74,25 +76,27 @@ extension CustomPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        let indexOfCurrentPageViewController =
-        individualPageViewControllerList.firstIndex(of: viewController)!
+        guard let indexOfCurrentPageViewController = individualPageViewControllerList.firstIndex(of: viewController) else { return nil }
+        let previousIndex = indexOfCurrentPageViewController - 1
         
-        if indexOfCurrentPageViewController == 0 {
+        if indexOfCurrentPageViewController == 1 {
+            return individualPageViewControllerList[0]
+        } else if previousIndex < 0 {
             return nil
         } else {
-            return individualPageViewControllerList[indexOfCurrentPageViewController - 1]
+            return individualPageViewControllerList[previousIndex]
         }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        let currentindexOfPageViewController =
-        individualPageViewControllerList.firstIndex(of: viewController)!
+        guard let currentindexOfPageViewController = individualPageViewControllerList.firstIndex(of: viewController) else { return nil }
+        let nextIndex = currentindexOfPageViewController + 1
         
-        if currentindexOfPageViewController == individualPageViewControllerList.count - 1 {
+        if nextIndex == individualPageViewControllerList.count {
             return nil
         } else {
-            return individualPageViewControllerList[currentindexOfPageViewController + 1]
+            return individualPageViewControllerList[nextIndex]
         }
     }
 }
@@ -104,5 +108,12 @@ extension CustomPageViewController {
     }
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
+    }
+}
+
+extension CustomPageViewController: SearchResultDelegate {
+    func foundResult(mapItem: MKMapItem) {
+        print("이거: \(mapItem.placemark.coordinate.latitude)")
+        print("이거: \(mapItem.placemark.coordinate.longitude)")
     }
 }

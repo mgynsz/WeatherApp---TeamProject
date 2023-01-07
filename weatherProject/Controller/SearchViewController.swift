@@ -41,11 +41,14 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: SearchResultDelegate {
     func foundResult(mapItem: MKMapItem) {
-        print(mapItem.placemark.locality ?? "")
-        print(mapItem.placemark.country ?? "")
-        print(mapItem.placemark.coordinate.latitude)
-        print(mapItem.placemark.coordinate.longitude)
-
+        let locality = mapItem.placemark.locality ?? " "
+        let country = mapItem.placemark.country ?? " "
+        let latitude: String = "\(mapItem.placemark.coordinate.latitude)"
+        let longitude: String = "\(mapItem.placemark.coordinate.longitude)"
+        let mapItemArray: [String] = [locality, country, latitude, longitude]
+        
+        NotificationCenter.default.post(name: Notification.Name("addVC"), object: mapItemArray)
+        
         // clear search phrase
         searchController.searchBar.text = ""
     }

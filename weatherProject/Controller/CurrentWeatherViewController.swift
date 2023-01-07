@@ -58,6 +58,9 @@ class CurrentWeatherViewController: UIViewController {
     //테이블뷰
     @IBOutlet weak var weekWeatherTableView: UITableView!
     
+    //지역이름
+    var locality = ""
+    var country = ""
     //날씨 컨디션 저장
     var currentWeatherCondition = ""
     //시간당 온도
@@ -107,7 +110,7 @@ class CurrentWeatherViewController: UIViewController {
     //view세팅
     func setupUI() {
         weatherView.layer.cornerRadius = 15
-//        searchBar.layer.cornerRadius = 15
+        //        searchBar.layer.cornerRadius = 15
         uvIndexView.layer.cornerRadius = 15
         visibilityView.layer.cornerRadius = 15
         windView.layer.cornerRadius = 15
@@ -120,7 +123,11 @@ class CurrentWeatherViewController: UIViewController {
         formatter.dateFormat = "MM월 d일 (E)"
         weatherDateLabel.text = formatter.string(from: Date())
         
-        weatherRegionLabel.text = "서울"
+        if locality != " " {
+            weatherRegionLabel.text = locality
+        } else {
+            weatherRegionLabel.text = country
+        }
     }
     
     //현재 온도 세팅
@@ -273,16 +280,22 @@ class CurrentWeatherViewController: UIViewController {
         }
     }
     
-    //back버튼을 눌렀을때
+    //back버튼을 눌렀을 때
     @IBAction func backButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
-    
-    var delVCNum: Int = 0
-    
+    //삭제 버튼을 눌렀을 때
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Notification.Name("delVC"), object: delVCNum)
-        self.dismiss(animated: true)
+        //alert 생성
+        let sheet = UIAlertController(title: "삭제", message: "해당 지역을 삭제하시겠습니까?", preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: {_ in
+            print("삭제")
+            //삭제 노티피케이션 신호 보내기
+            NotificationCenter.default.post(name: Notification.Name("delVC"), object: "delete")
+            self.dismiss(animated: true)
+        }))
+        sheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { _ in print("취소")}))
+        present(sheet, animated: true)
     }
 }
 

@@ -21,8 +21,10 @@ class DefaultPageViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var weatherMaxTempLabel: UILabel!
     @IBOutlet weak var weatherMinTempLabel: UILabel!
     
+    let latitude = 37.5666
+    let longitude = 126.9784
     //서울의 좌표
-    let seoul = CLLocation(latitude: 37.5666, longitude: 126.9784)
+    lazy var seoul = CLLocation(latitude: latitude, longitude: longitude)
     //날씨 데이터 저장
     var weather: Weather?
     //날씨 컨디션 저장

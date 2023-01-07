@@ -8,7 +8,16 @@
 import UIKit
 import MapKit
 
-class CustomPageViewController: UIPageViewController, UIPageViewControllerDelegate {
+class CustomPageViewController: UIPageViewController, UIPageViewControllerDelegate, SearchResultDelegate {
+    
+    
+    func foundResult(mapItem: MKMapItem) {
+        print("페이지: \(mapItem.placemark.locality ?? "")")
+        print("페이지: \(mapItem.placemark.country ?? "")")
+        print("페이지: \(mapItem.placemark.coordinate.latitude)")
+        print("페이지: \(mapItem.placemark.coordinate.longitude)")
+    }
+    
     
     var individualPageViewControllerList = [UIViewController]()
     let pageControl = UIPageControl()
@@ -33,6 +42,9 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         self.dataSource = self
         self.delegate = self
         
+        let controller = SearchController()
+        controller.delegate = self
+        
         weatherCard()
         addNotiObserver()
         delNotiObserver()
@@ -54,15 +66,15 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     }
     
     @objc func addVC(notification: NSNotification) {
-        if let addString = notification.object as? String {
-            print(addString)
-            individualPageViewControllerList.append(PageDetailViewController.getInstance())
+        if let mapItemArray = notification.object as? [String] {
+            print(mapItemArray)
+            individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItemArray[0], country: mapItemArray[1], latitude: mapItemArray[2], longitude: mapItemArray[3]))
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
         }
     }
     
     @objc func delVC(notification: NSNotification) {
-        if let addString = notification.object as? Int {
+        if let addString = notification.object as? String {
             print(addString)
             individualPageViewControllerList.remove(at: individualPageViewControllerList.count - 1)
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
@@ -111,9 +123,3 @@ extension CustomPageViewController {
     }
 }
 
-extension CustomPageViewController: SearchResultDelegate {
-    func foundResult(mapItem: MKMapItem) {
-        print("이거: \(mapItem.placemark.coordinate.latitude)")
-        print("이거: \(mapItem.placemark.coordinate.longitude)")
-    }
-}

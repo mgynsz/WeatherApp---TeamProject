@@ -10,6 +10,7 @@ import MapKit
 
 class SearchViewController: UIViewController {
     
+    @IBOutlet weak var backgroundView: UIView!
     
     var searchController: UISearchController!
     
@@ -35,7 +36,7 @@ class SearchViewController: UIViewController {
         searchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         
-        view.addSubview(searchBar)
+        backgroundView.addSubview(searchBar)
     }
 }
 
@@ -47,7 +48,10 @@ extension SearchViewController: SearchResultDelegate {
         let longitude: String = "\(mapItem.placemark.coordinate.longitude)"
         let mapItemArray: [String] = [locality, country, latitude, longitude]
         
-        NotificationCenter.default.post(name: Notification.Name("addVC"), object: mapItemArray)
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SearchWeatherViewController") else {return}
+          self.present(nextVC, animated: true)
+        
+//        NotificationCenter.default.post(name: Notification.Name("addVC"), object: mapItemArray)
         
         // clear search phrase
         searchController.searchBar.text = ""

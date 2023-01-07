@@ -98,10 +98,8 @@ extension SearchController: UITableViewDataSource, UITableViewDelegate  {
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.foundResult(mapItem: searchResults[indexPath.row])
-        
         dismiss(animated: true, completion: nil)
-        
+        delegate?.foundResult(mapItem: searchResults[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

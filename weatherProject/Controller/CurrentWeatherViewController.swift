@@ -350,6 +350,7 @@ extension CurrentWeatherViewController: UITableViewDelegate, UITableViewDataSour
         let formatter = DateFormatter()
         //요일만 나오도록 설정
         formatter.dateFormat = "EEE"
+        formatter.locale = Locale(identifier: "ko_KR")
         //오늘은 오늘이라고 설정하고 나머지는 요일로 나타내는 배열
         var weekDayArray: [String] = ["오늘"]
         for i in 1...9 {

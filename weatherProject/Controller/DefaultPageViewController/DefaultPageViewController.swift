@@ -138,6 +138,7 @@ class DefaultPageViewController: UIViewController, CLLocationManagerDelegate {
         //오늘 날짜 표시
         let formatter = DateFormatter()
         formatter.dateFormat = "MM월 d일 (E)"
+        formatter.locale = Locale(identifier: "ko_KR")
         weatherDateLabel.text = formatter.string(from: Date())
         weatherRegionLabel.text = "나의 위치"
 

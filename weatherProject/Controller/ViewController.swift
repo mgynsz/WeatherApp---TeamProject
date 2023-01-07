@@ -145,6 +145,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         //DateFormatter 생성
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
         //요일만 나오도록 설정
         formatter.dateFormat = "EEE"
         //오늘은 오늘이라고 설정하고 나머지는 요일로 나타내는 배열

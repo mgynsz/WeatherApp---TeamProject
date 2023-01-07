@@ -28,15 +28,4 @@ class CalenderViewController: UIViewController {
         print(formatter.string(from: datePicker.date))
         self.dismiss(animated: true)
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //        self.dismiss(animated: true)
-    }
-    
-    var addString = "AddButtonTapped"
-    
-    @IBAction func addButtonTapped(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Notification.Name("addVC"), object: addString)
-    }
-    
 }

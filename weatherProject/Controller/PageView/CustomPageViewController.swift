@@ -8,16 +8,7 @@
 import UIKit
 import MapKit
 
-class CustomPageViewController: UIPageViewController, UIPageViewControllerDelegate, SearchResultDelegate {
-    
-    
-    func foundResult(mapItem: MKMapItem) {
-        print("페이지: \(mapItem.placemark.locality ?? "")")
-        print("페이지: \(mapItem.placemark.country ?? "")")
-        print("페이지: \(mapItem.placemark.coordinate.latitude)")
-        print("페이지: \(mapItem.placemark.coordinate.longitude)")
-    }
-    
+class CustomPageViewController: UIPageViewController, UIPageViewControllerDelegate {
     
     var individualPageViewControllerList = [UIViewController]()
     let pageControl = UIPageControl()
@@ -31,6 +22,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
                 (view as! UIPageControl).pageIndicatorTintColor = .gray
                 (view as! UIPageControl).setIndicatorImage(UIImage(systemName: "plus"), forPage: 0)
                 (view as! UIPageControl).currentPage = 1
+                (view as! UIPageControl).numberOfPages = individualPageViewControllerList.count
             }
         }
     }
@@ -41,9 +33,6 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         self.dataSource = nil
         self.dataSource = self
         self.delegate = self
-        
-        let controller = SearchController()
-        controller.delegate = self
         
         weatherCard()
         addNotiObserver()
@@ -56,15 +45,15 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         individualPageViewControllerList.append(DefaultPageViewController.getInstance())
         setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true, completion: nil)
     }
-    
+    //날씨카드 추가 노티피케이션 옵져버
     private func addNotiObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(addVC), name: NSNotification.Name("addVC"), object: nil)
     }
-    
+    //날씨카드 삭제 노티피케이션 옵져버
     private func delNotiObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(delVC), name: NSNotification.Name("delVC"), object: nil)
     }
-    
+    //추가 함수
     @objc func addVC(notification: NSNotification) {
         if let mapItemArray = notification.object as? [String] {
             print(mapItemArray)
@@ -72,7 +61,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
         }
     }
-    
+    //삭제 함수
     @objc func delVC(notification: NSNotification) {
         if let addString = notification.object as? String {
             print(addString)
@@ -114,10 +103,11 @@ extension CustomPageViewController: UIPageViewControllerDataSource {
 }
 
 extension CustomPageViewController {
-    
+
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return individualPageViewControllerList.count
     }
+    
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }

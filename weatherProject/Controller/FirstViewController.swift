@@ -24,6 +24,11 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        view.backgroundColor = .black
+    }
+    //상태바 색상을 하얀색으로 변경
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func setupUI() {

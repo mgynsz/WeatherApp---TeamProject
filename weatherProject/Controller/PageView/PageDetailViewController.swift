@@ -52,8 +52,11 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
     var currentWeatherDewPoint: Int = 0
     //강수량
     var precipitation: Int = 0
-    
-    var indexNum = 0
+    //지역 정보
+    var locality = ""
+    var country = ""
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -269,11 +272,6 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
             break
         }
     }
-    
-    var locality = ""
-    var country = ""
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
     
     static func getInstance(locality: String, country: String, latitude: String, longitude: String) -> PageDetailViewController {
         

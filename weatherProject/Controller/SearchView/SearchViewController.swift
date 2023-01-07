@@ -47,9 +47,15 @@ extension SearchViewController: SearchResultDelegate {
         let latitude: String = "\(mapItem.placemark.coordinate.latitude)"
         let longitude: String = "\(mapItem.placemark.coordinate.longitude)"
         let mapItemArray: [String] = [locality, country, latitude, longitude]
+                
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SearchWeatherViewController") as? SearchWeatherViewController else {return}
+        nextVC.locality = locality
+        nextVC.country = country
+        nextVC.latitude = Double(latitude)!
+        nextVC.longitude = Double(latitude)!
+        nextVC.mapItemArray = mapItemArray
         
-        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SearchWeatherViewController") else {return}
-          self.present(nextVC, animated: true)
+        self.present(nextVC, animated: true)
         
 //        NotificationCenter.default.post(name: Notification.Name("addVC"), object: mapItemArray)
         

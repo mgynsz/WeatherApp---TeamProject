@@ -71,13 +71,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		45612A8929654EB000FA6B0A /* DefaultPageViewController */ = {
+		45612A8929654EB000FA6B0A /* DefaultPageView */ = {
 			isa = PBXGroup;
 			children = (
 				45612A8A2965523800FA6B0A /* DefaultPageViewController.swift */,
 				45612A8C2965528D00FA6B0A /* DefaultCurrentWeatherViewController.swift */,
 			);
-			path = DefaultPageViewController;
+			path = DefaultPageView;
 			sourceTree = "<group>";
 		};
 		457299E529593C0200D7DF1E /* Search */ = {
@@ -96,16 +96,32 @@
 				463ADD8828E6DD06009024DE /* ViewController.swift */,
 				457BF4632929DFF9009F08ED /* FirstViewController.swift */,
 				452C1871292E335B00E6FDC1 /* CalenderViewController.swift */,
-				4530FFCF29582673001AA849 /* SearchViewController.swift */,
-				4530FFD129582863001AA849 /* SearchController.swift */,
-				45907C072969268700A4968F /* SearchWeatherViewController.swift */,
-				45612A8929654EB000FA6B0A /* DefaultPageViewController */,
+				45907C0A2969886800A4968F /* SearchView */,
+				45612A8929654EB000FA6B0A /* DefaultPageView */,
+				45907C092969882900A4968F /* PageView */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		45907C092969882900A4968F /* PageView */ = {
+			isa = PBXGroup;
+			children = (
 				455262E42963E19F00E75EC2 /* AddWeatherCardViewController.swift */,
 				45B9385A293DE11900051488 /* CurrentWeatherViewController.swift */,
 				457CBC04295BDD7100E9A568 /* PageDetailViewController.swift */,
 				457CBC06295BDD9500E9A568 /* CustomPageViewController.swift */,
 			);
-			path = Controller;
+			path = PageView;
+			sourceTree = "<group>";
+		};
+		45907C0A2969886800A4968F /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				4530FFCF29582673001AA849 /* SearchViewController.swift */,
+				4530FFD129582863001AA849 /* SearchController.swift */,
+				45907C072969268700A4968F /* SearchWeatherViewController.swift */,
+			);
+			path = SearchView;
 			sourceTree = "<group>";
 		};
 		45DADB5829399DB30062D72B /* Delegate */ = {
@@ -459,6 +475,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -498,6 +515,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

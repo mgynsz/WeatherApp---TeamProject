@@ -1210,6 +1210,7 @@
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tTm-ra-jNd">
                                 <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                                <color key="barTintColor" systemColor="systemGray6Color"/>
                                 <items>
                                     <navigationItem id="Jf9-9s-O6R">
                                         <barButtonItem key="leftBarButtonItem" style="plain" id="25T-rO-XcJ">
@@ -1333,7 +1334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peV-3q-E4J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2322" y="98"/>
+            <point key="canvasLocation" x="2348" y="72"/>
         </scene>
         <!--Calender View Controller-->
         <scene sceneID="Sh3-WA-n7i">
@@ -3012,6 +3013,9 @@
                                                 <state key="normal" title="취소">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="cancelButtonTapped:" destination="m0v-7j-iZz" eventType="touchUpInside" id="22O-vy-Ngg"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="jjx-7d-jc7">
@@ -3021,6 +3025,9 @@
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="추가"/>
+                                                <connections>
+                                                    <action selector="addButtonTapped:" destination="m0v-7j-iZz" eventType="touchUpInside" id="cix-xy-Y70"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -3077,7 +3084,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1S-cf-0mD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2318.840579710145" y="1196.6517857142856"/>
+            <point key="canvasLocation" x="2346" y="1196"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

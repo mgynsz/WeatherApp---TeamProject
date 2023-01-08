@@ -26,13 +26,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gH9-ru-JbI">
-                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clU-zm-92e">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O5H-52-pQL">
-                                                <rect key="frame" x="20" y="32" width="374" height="93.5"/>
+                                                <rect key="frame" x="20" y="20" width="374" height="93.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="지구온도" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cex-3Z-hdh">
                                                         <rect key="frame" x="16" y="16" width="62.5" height="21.5"/>
@@ -68,7 +68,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="kJT-kJ-Lbl">
-                                                <rect key="frame" x="20" y="145.5" width="374" height="81.5"/>
+                                                <rect key="frame" x="20" y="133.5" width="374" height="81.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNZ-fv-yed">
                                                         <rect key="frame" x="0.0" y="0.0" width="179" height="81.5"/>
@@ -80,20 +80,18 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rGD-g5-l8I">
-                                                                <rect key="frame" x="103" y="11" width="60" height="59.5"/>
+                                                                <rect key="frame" x="107.5" y="14.5" width="55.5" height="53"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="showers" translatesAutoresizingMaskIntoConstraints="NO" id="DGV-ci-VI8">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="40"/>
-                                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="40" id="Pyt-xX-Mzy"/>
-                                                                            <constraint firstAttribute="width" constant="60" id="p7c-OM-wRl"/>
-                                                                        </constraints>
-                                                                    </imageView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="흐림, 비" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcT-Se-Z4B">
-                                                                        <rect key="frame" x="0.0" y="40" width="60" height="19.5"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5º" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFX-Ls-bg0">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="55.5" height="33.5"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평균기온" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcT-Se-Z4B">
+                                                                        <rect key="frame" x="0.0" y="33.5" width="55.5" height="19.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                        <nil key="textColor"/>
+                                                                        <color key="textColor" systemColor="systemGrayColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -132,7 +130,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7n-hq-vGB">
                                                                 <rect key="frame" x="97.5" y="0.0" width="81.5" height="81.5"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YWs-Sx-aAM">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YWs-Sx-aAM">
                                                                         <rect key="frame" x="23" y="23.5" width="36" height="34.5"/>
                                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
@@ -153,7 +151,7 @@
                                                 </subviews>
                                             </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fD5-t7-Dsf">
-                                                <rect key="frame" x="20" y="504" width="374" height="290"/>
+                                                <rect key="frame" x="20" y="492" width="374" height="302"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeekWeatherTableViewCell" id="TdH-xx-Ehn" customClass="WeekWeatherTableViewCell" customModule="weatherProject" customModuleProvider="target">
@@ -241,7 +239,7 @@
                                                 </prototypes>
                                             </tableView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="9WB-6N-BYQ">
-                                                <rect key="frame" x="24" y="476" width="140" height="20"/>
+                                                <rect key="frame" x="24" y="464" width="140" height="20"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calender-today" translatesAutoresizingMaskIntoConstraints="NO" id="g4r-F9-Zss">
                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -260,7 +258,7 @@
                                                 </subviews>
                                             </stackView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qed-ge-8YX">
-                                                <rect key="frame" x="20" y="247" width="374" height="217"/>
+                                                <rect key="frame" x="20" y="235" width="374" height="217"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Qed-ge-8YX" secondAttribute="height" multiplier="2:1.16" id="QNu-7X-d9H"/>
                                                 </constraints>
@@ -273,7 +271,7 @@
                                         <constraints>
                                             <constraint firstItem="O5H-52-pQL" firstAttribute="leading" secondItem="clU-zm-92e" secondAttribute="leading" constant="20" id="1VX-TQ-Vlk"/>
                                             <constraint firstAttribute="height" priority="250" constant="818" id="2jb-v7-Q0K"/>
-                                            <constraint firstItem="O5H-52-pQL" firstAttribute="top" secondItem="clU-zm-92e" secondAttribute="top" constant="32" id="JhI-7f-b4l"/>
+                                            <constraint firstItem="O5H-52-pQL" firstAttribute="top" secondItem="clU-zm-92e" secondAttribute="top" constant="20" id="JhI-7f-b4l"/>
                                             <constraint firstAttribute="trailing" secondItem="kJT-kJ-Lbl" secondAttribute="trailing" constant="20" id="Jl0-pP-ZRe"/>
                                             <constraint firstItem="Qed-ge-8YX" firstAttribute="leading" secondItem="clU-zm-92e" secondAttribute="leading" constant="20" id="KaZ-5B-WAe"/>
                                             <constraint firstAttribute="trailing" secondItem="Qed-ge-8YX" secondAttribute="trailing" constant="20" id="KiN-jE-zfO"/>
@@ -300,18 +298,30 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="fBQ-Ma-kgo"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Odn-F9-dVy"/>
                             </scrollView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYD-37-T86">
+                                <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                                <color key="barTintColor" systemColor="systemGray6Color"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="지구온도계" id="MfW-o6-KFV"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
+                            <constraint firstItem="HYD-37-T86" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6JS-dW-ccd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gH9-ru-JbI" secondAttribute="trailing" id="6iz-IR-QQw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gH9-ru-JbI" secondAttribute="bottom" id="Cdc-fE-a37"/>
-                            <constraint firstItem="gH9-ru-JbI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ei2-Hu-Me6"/>
+                            <constraint firstItem="HYD-37-T86" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="P8W-YF-eoQ"/>
+                            <constraint firstItem="gH9-ru-JbI" firstAttribute="top" secondItem="HYD-37-T86" secondAttribute="bottom" id="gua-xB-gMo"/>
+                            <constraint firstItem="HYD-37-T86" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="jn4-Mu-8Cz"/>
                             <constraint firstItem="gH9-ru-JbI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lll-zv-NOE"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="LYWeatherImage" destination="DGV-ci-VI8" id="6k8-Ax-gih"/>
                         <outlet property="LYWeatherLabel" destination="dcT-Se-Z4B" id="KGY-VX-Agz"/>
                         <outlet property="LYtempView" destination="jNZ-fv-yed" id="ROk-aI-lfy"/>
                         <outlet property="calenderView" destination="y9t-vJ-jpF" id="v4h-Q9-ztF"/>
@@ -322,6 +332,7 @@
                         <segue destination="EiK-Gc-WGF" kind="presentation" identifier="showFirstView" modalPresentationStyle="fullScreen" id="EHV-yi-9ZT"/>
                         <segue destination="1Ph-NK-gqh" kind="presentation" identifier="showCalenderView" modalPresentationStyle="pageSheet" id="gTu-C5-VCk"/>
                         <segue destination="yDM-Fs-7Hc" kind="presentation" identifier="showSearchView" id="phe-B5-UBk"/>
+                        <segue destination="1sa-l0-REl" kind="presentation" identifier="showRegionView" id="RMP-Z9-B66"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -509,8 +520,12 @@
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFD-uA-JaQ">
                                 <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                                 <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
                                 <items>
-                                    <navigationItem id="Tcg-R8-aBv">
+                                    <navigationItem title="지구온도" id="Tcg-R8-aBv">
                                         <barButtonItem key="leftBarButtonItem" style="plain" id="nie-SL-YUG">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="gAh-Ei-f2n">
                                                 <rect key="frame" x="20" y="4" width="60" height="36"/>
@@ -1212,7 +1227,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                                 <color key="barTintColor" systemColor="systemGray6Color"/>
                                 <items>
-                                    <navigationItem id="Jf9-9s-O6R">
+                                    <navigationItem title="날씨" id="Jf9-9s-O6R">
                                         <barButtonItem key="leftBarButtonItem" style="plain" id="25T-rO-XcJ">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Caj-O5-Yii">
                                                 <rect key="frame" x="20" y="5" width="54" height="34"/>
@@ -1334,7 +1349,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peV-3q-E4J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2348" y="72"/>
+            <point key="canvasLocation" x="886" y="638"/>
+        </scene>
+        <!--Region View Controller-->
+        <scene sceneID="ns6-ai-wlm">
+            <objects>
+                <viewController id="1sa-l0-REl" customClass="RegionViewController" customModule="weatherProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KaL-Tw-XeB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q8O-rl-Kov">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="지역" id="c8H-wH-ZrG">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="LAm-gQ-E0f">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ZfI-AG-8Rg">
+                                                <rect key="frame" x="20" y="10.5" width="54" height="35"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="선택">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="selectButtonTapped:" destination="1sa-l0-REl" eventType="touchUpInside" id="NB4-Xf-j9B"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <pickerView contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="OXg-5o-u4u">
+                                <rect key="frame" x="0.0" y="80" width="414" height="718"/>
+                            </pickerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7bL-Kq-eDl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7bL-Kq-eDl" firstAttribute="bottom" secondItem="OXg-5o-u4u" secondAttribute="bottom" constant="40" id="0Rz-M5-vO0"/>
+                            <constraint firstItem="OXg-5o-u4u" firstAttribute="top" secondItem="Q8O-rl-Kov" secondAttribute="bottom" constant="24" id="12y-0L-je5"/>
+                            <constraint firstAttribute="trailing" secondItem="Q8O-rl-Kov" secondAttribute="trailing" id="3Ew-Lu-Bog"/>
+                            <constraint firstItem="OXg-5o-u4u" firstAttribute="trailing" secondItem="7bL-Kq-eDl" secondAttribute="trailing" id="Lrx-yV-3bE"/>
+                            <constraint firstItem="Q8O-rl-Kov" firstAttribute="leading" secondItem="KaL-Tw-XeB" secondAttribute="leading" id="PNB-pm-zUH"/>
+                            <constraint firstItem="OXg-5o-u4u" firstAttribute="leading" secondItem="7bL-Kq-eDl" secondAttribute="leading" id="fCe-40-1gK"/>
+                            <constraint firstItem="Q8O-rl-Kov" firstAttribute="top" secondItem="KaL-Tw-XeB" secondAttribute="top" id="t5y-qe-Dsu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pickerView" destination="OXg-5o-u4u" id="3be-Xc-gTC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uvj-zg-pJX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1622" y="462"/>
         </scene>
         <!--Calender View Controller-->
         <scene sceneID="Sh3-WA-n7i">
@@ -1352,20 +1421,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <navigationItem id="67M-SE-7pD">
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="w0f-fm-5gH">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="OrJ-bD-RyC">
-                                                <rect key="frame" x="20" y="11" width="32" height="34"/>
+                                    <navigationItem title="날짜" id="67M-SE-7pD">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="LGG-p9-k6f">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="fsY-Wt-Ovo">
+                                                <rect key="frame" x="20" y="10.5" width="54" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="선택">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="backButtonTapped:" destination="EiK-Gc-WGF" eventType="touchUpInside" id="pPt-hw-cy6"/>
-                                                    <action selector="selectButtonTapped:" destination="1Ph-NK-gqh" eventType="touchUpInside" id="BCz-x2-q5w"/>
+                                                    <action selector="selectButtonTapped:" destination="1Ph-NK-gqh" eventType="touchUpInside" id="muY-ZP-Jfk"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
@@ -1437,7 +1504,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4SN-ch-gyO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-717" y="557"/>
+            <point key="canvasLocation" x="-717" y="620"/>
         </scene>
         <!--Page Detail View Controller-->
         <scene sceneID="AK6-By-CP8">
@@ -2289,7 +2356,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                                 <color key="barTintColor" systemColor="systemGray6Color"/>
                                 <items>
-                                    <navigationItem id="V3O-5Y-n6Z">
+                                    <navigationItem title="날씨" id="V3O-5Y-n6Z">
                                         <barButtonItem key="leftBarButtonItem" style="plain" id="tyk-w1-zBQ">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="5fA-Sq-Kuv">
                                                 <rect key="frame" x="20" y="5" width="54" height="34"/>
@@ -3084,11 +3151,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1S-cf-0mD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2346" y="1196"/>
+            <point key="canvasLocation" x="887" y="1762"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="V8z-yQ-Apj"/>
+        <segue reference="phe-B5-UBk"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="calender-check" width="24" height="24"/>
@@ -3099,9 +3166,8 @@
         <image name="earthTemp" width="256" height="40.5"/>
         <image name="eye.fill" catalog="system" width="128" height="80"/>
         <image name="humidity" catalog="system" width="128" height="96"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="map" catalog="system" width="128" height="112"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="showers" width="48" height="48"/>
         <image name="sun.max.fill" catalog="system" width="128" height="125"/>
         <image name="sunny" width="48" height="48"/>
         <image name="tempFlour" width="16" height="16"/>

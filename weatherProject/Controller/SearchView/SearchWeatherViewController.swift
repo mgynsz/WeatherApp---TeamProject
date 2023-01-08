@@ -9,7 +9,7 @@ import UIKit
 import WeatherKit
 import CoreLocation
 
-class SearchWeatherViewController: UIViewController {
+class SearchWeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     //가장 기본 뷰
@@ -112,9 +112,19 @@ class SearchWeatherViewController: UIViewController {
         weekWeatherTableView.delegate = self
         weekWeatherTableView.dataSource = self
         
+        //위치 매니저 생성 및 설정
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        //위치 정확도
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //위치 업데이트
+        locationManager.startUpdatingLocation()
+        
         //날씨세팅
         setWeatherUI()
         runWeatherKit(latitude: latitude, longitude: longitude)
+        
     }
     
     func runWeatherKit(latitude: Double, longitude: Double) {
@@ -134,10 +144,6 @@ class SearchWeatherViewController: UIViewController {
                         self.weekWeatherMinTempArray.append(Int(round(self.weather!.dailyForecast[i].lowTemperature.value)))
                         self.weekWeatherSymbolArray.append(self.weather!.dailyForecast[i].symbolName)
                     }
-                    print(self.weekWeatherSymbolArray)
-                    print(self.weather!.currentWeather.condition)
-                    print(self.weather!.currentWeather.symbolName)
-                    print(self.weather!.currentWeather.condition)
                     //현재시간 불러오기
                     let formatter = DateFormatter()
                     formatter.locale = Locale(identifier: "ko")

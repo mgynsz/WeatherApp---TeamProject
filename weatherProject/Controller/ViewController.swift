@@ -14,7 +14,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tempLabel: UILabel!
     //작년 날씨 뷰
     @IBOutlet weak var LYtempView: UIView!
-    @IBOutlet weak var LYWeatherImage: UIImageView!
     @IBOutlet weak var LYWeatherLabel: UILabel!
     //캘린더 뷰
     @IBOutlet weak var calenderView: UIView!
@@ -42,10 +41,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         //view를 클릭 가능하도록 설정
         self.firstview.isUserInteractionEnabled = true
+        self.LYtempView.isUserInteractionEnabled = true
         self.calenderView.isUserInteractionEnabled = true
         self.otherOptionView.isUserInteractionEnabled = true
         //제쳐스 추가
         self.firstview.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.firstViewTapped)))
+        self.LYtempView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.LYtempViewTapped)))
         self.calenderView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.calenderViewTapped)))
         self.otherOptionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.otherOptionViewTapped)))
         //테이블뷰 델리케이트 설정
@@ -115,13 +116,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @objc func firstViewTapped(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "showFirstView", sender: sender)
     }
+    @objc func LYtempViewTapped(_ sender: UITapGestureRecognizer) {
+        //alert 생성
+        let sheet = UIAlertController(title: "'작년 오늘'의 온도는 국내 지역의 평균기온만 제공됩니다.", message: nil, preferredStyle: .alert)
+        sheet.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { _ in print("확인")}))
+        present(sheet, animated: true)
+    }
     //캘린더뷰를 눌렀을 때
     @objc func calenderViewTapped(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "showCalenderView", sender: sender)
     }
-    //검색뷰를 눌렀을 때
+    //지역뷰를 눌렀을 때
     @objc func otherOptionViewTapped(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: "showSearchView", sender: sender)
+        performSegue(withIdentifier: "showRegionView", sender: sender)
     }
 }
 

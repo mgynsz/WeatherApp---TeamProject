@@ -5,10 +5,8 @@
 import UIKit
 
 class CalenderViewController: UIViewController {
-
     
     @IBOutlet weak var datePicker: UIDatePicker!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

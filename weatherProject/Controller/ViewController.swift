@@ -5,7 +5,7 @@
 import UIKit
 import WeatherKit
 import CoreLocation
-//hi
+
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
     // -MARK: iboutlet

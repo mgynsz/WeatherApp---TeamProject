@@ -15,8 +15,6 @@ class SearchController: UIViewController {
     var searchTimer: Timer?
     var searchResults: [MKMapItem] = []
     
-    var addString = "AddButtonTapped"
-
     lazy var tableView: UITableView = {
         let t = UITableView()
         t.translatesAutoresizingMaskIntoConstraints = false
@@ -100,12 +98,8 @@ extension SearchController: UITableViewDataSource, UITableViewDelegate  {
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.foundResult(mapItem: searchResults[indexPath.row])
-        print("여기: \(searchResults[0])")
-        
         dismiss(animated: true, completion: nil)
-        
-        NotificationCenter.default.post(name: Notification.Name("addVC"), object: addString)
+        delegate?.foundResult(mapItem: searchResults[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -22,6 +22,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
                 (view as! UIPageControl).pageIndicatorTintColor = .gray
                 (view as! UIPageControl).setIndicatorImage(UIImage(systemName: "plus"), forPage: 0)
                 (view as! UIPageControl).currentPage = 1
+                (view as! UIPageControl).numberOfPages = individualPageViewControllerList.count
             }
         }
     }
@@ -44,25 +45,25 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         individualPageViewControllerList.append(DefaultPageViewController.getInstance())
         setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true, completion: nil)
     }
-    
+    //날씨카드 추가 노티피케이션 옵져버
     private func addNotiObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(addVC), name: NSNotification.Name("addVC"), object: nil)
     }
-    
+    //날씨카드 삭제 노티피케이션 옵져버
     private func delNotiObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(delVC), name: NSNotification.Name("delVC"), object: nil)
     }
-    
+    //추가 함수
     @objc func addVC(notification: NSNotification) {
-        if let addString = notification.object as? String {
-            print(addString)
-            individualPageViewControllerList.append(PageDetailViewController.getInstance())
+        if let mapItemArray = notification.object as? [String] {
+            print(mapItemArray)
+            individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItemArray[0], country: mapItemArray[1], latitude: mapItemArray[2], longitude: mapItemArray[3]))
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
         }
     }
-    
+    //삭제 함수
     @objc func delVC(notification: NSNotification) {
-        if let addString = notification.object as? Int {
+        if let addString = notification.object as? String {
             print(addString)
             individualPageViewControllerList.remove(at: individualPageViewControllerList.count - 1)
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
@@ -102,18 +103,13 @@ extension CustomPageViewController: UIPageViewControllerDataSource {
 }
 
 extension CustomPageViewController {
-    
+
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return individualPageViewControllerList.count
     }
+    
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
 }
 
-extension CustomPageViewController: SearchResultDelegate {
-    func foundResult(mapItem: MKMapItem) {
-        print("이거: \(mapItem.placemark.coordinate.latitude)")
-        print("이거: \(mapItem.placemark.coordinate.longitude)")
-    }
-}

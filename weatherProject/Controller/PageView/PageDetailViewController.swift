@@ -21,8 +21,6 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var weatherMaxTempLabel: UILabel!
     @IBOutlet weak var weatherMinTempLabel: UILabel!
     
-    //서울의 좌표
-    let seoul = CLLocation(latitude: 37.5666, longitude: 126.9784)
     //날씨 데이터 저장
     var weather: Weather?
     //날씨 컨디션 저장
@@ -54,8 +52,11 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
     var currentWeatherDewPoint: Int = 0
     //강수량
     var precipitation: Int = 0
-    
-    var indexNum = 0
+    //지역 정보
+    var locality = ""
+    var country = ""
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,13 +77,20 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
         //위치 업데이트
         locationManager.startUpdatingLocation()
         
+        runWeatherKit(latitude: latitude, longitude: longitude)
+    }
+    
+    func runWeatherKit(latitude: Double, longitude: Double) {
+        
+        //날씨의 좌표
+        let seoul = CLLocation(latitude: latitude, longitude: longitude)
         //weatherkit 사용
         let weatherService = WeatherService.shared
         
         DispatchQueue.main.async {
             Task {
                 do {
-                    self.weather = try await weatherService.weather(for: self.seoul)
+                    self.weather = try await weatherService.weather(for: seoul)
                     //10일간 날씨 받아오기
                     for i in 0...9 {
                         self.weekWeatherMaxTempArray.append(Int(round(self.weather!.dailyForecast[i].highTemperature.value)))
@@ -136,8 +144,14 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
         //오늘 날짜 표시
         let formatter = DateFormatter()
         formatter.dateFormat = "MM월 d일 (E)"
+        formatter.locale = Locale(identifier: "ko_KR")
         weatherDateLabel.text = formatter.string(from: Date())
-        weatherRegionLabel.text = "서울"
+        
+        if locality != " " {
+            weatherRegionLabel.text = locality
+        } else {
+            weatherRegionLabel.text = country
+        }
 
         weatherLabel.text = self.currentWeatherCondition
         //현재온도
@@ -159,6 +173,9 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCurrentWeatherView" {
             guard let vc = segue.destination as? CurrentWeatherViewController else { return }
+            
+            vc.locality = self.locality
+            vc.country = self.country
             vc.currentWeatherCondition = self.currentWeatherCondition
             vc.hourWeatherTempArray = self.hourWeatherTempArray
             vc.weekWeatherSymbolArray = self.weekWeatherSymbolArray
@@ -256,9 +273,14 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    static func getInstance() -> PageDetailViewController {
-
+    static func getInstance(locality: String, country: String, latitude: String, longitude: String) -> PageDetailViewController {
+        
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageDetailViewController") as! PageDetailViewController
+        
+        vc.locality = locality
+        vc.country = country
+        vc.latitude = Double(latitude)!
+        vc.longitude = Double(longitude)!
         
         return vc
     }

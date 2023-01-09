@@ -1,11 +1,15 @@
-
-
-
+//
+//  SearchWeatherViewController.swift
+//  weatherProject
+//
+//  Created by 표현수 on 2023/01/07.
+//
 
 import UIKit
+import WeatherKit
+import CoreLocation
 
-
-class CurrentWeatherViewController: UIViewController {
+class SearchWeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     //가장 기본 뷰
@@ -58,6 +62,14 @@ class CurrentWeatherViewController: UIViewController {
     //테이블뷰
     @IBOutlet weak var weekWeatherTableView: UITableView!
     
+    //지역정보
+    var locality = ""
+    var country = ""
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
+    var mapItemArray: [String] = []
+    //날씨 데이터 저장
+    var weather: Weather?
     //날씨 컨디션 저장
     var currentWeatherCondition = ""
     //시간당 온도
@@ -92,7 +104,7 @@ class CurrentWeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-
+        
         //collectionView 델리게이트 설정
         weatherCollectionView.delegate = self
         weatherCollectionView.dataSource = self
@@ -100,14 +112,80 @@ class CurrentWeatherViewController: UIViewController {
         weekWeatherTableView.delegate = self
         weekWeatherTableView.dataSource = self
         
+        //위치 매니저 생성 및 설정
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        //위치 정확도
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //위치 업데이트
+        locationManager.startUpdatingLocation()
+        
         //날씨세팅
         setWeatherUI()
+        runWeatherKit(latitude: latitude, longitude: longitude)
+        
+    }
+    
+    func runWeatherKit(latitude: Double, longitude: Double) {
+        
+        //날씨의 좌표
+        let seoul = CLLocation(latitude: latitude, longitude: longitude)
+        //weatherkit 사용
+        let weatherService = WeatherService.shared
+        
+        DispatchQueue.main.async {
+            Task {
+                do {
+                    self.weather = try await weatherService.weather(for: seoul)
+                    //10일간 날씨 받아오기
+                    for i in 0...9 {
+                        self.weekWeatherMaxTempArray.append(Int(round(self.weather!.dailyForecast[i].highTemperature.value)))
+                        self.weekWeatherMinTempArray.append(Int(round(self.weather!.dailyForecast[i].lowTemperature.value)))
+                        self.weekWeatherSymbolArray.append(self.weather!.dailyForecast[i].symbolName)
+                    }
+                    //현재시간 불러오기
+                    let formatter = DateFormatter()
+                    formatter.locale = Locale(identifier: "ko")
+                    formatter.dateFormat = "HH"
+                    let currentHour = Int(formatter.string(from: Date()))!
+                    //시간당 날씨 받아오기
+                    for j in (currentHour + 2)...(currentHour + 25) {
+                        self.hourWeatherTempArray.append("\(Int(round(self.weather!.hourlyForecast[j].temperature.value)))º")
+                        self.hourWeatherSymbol.append(self.weather!.hourlyForecast[j].symbolName)
+                    }
+                    
+                    //현재 날씨 받아오기
+                    self.currentWeatherCondition = self.weather!.currentWeather.condition.rawValue
+                    self.dailyWeatherMaxTemp = Int(round(self.weather!.dailyForecast[0].highTemperature.value))
+                    self.dailyWeatherMinTemp = Int(round(self.weather!.dailyForecast[0].lowTemperature.value))
+                    self.currentWeatherSymbol = self.weather!.currentWeather.symbolName
+                    self.currentWeatherTemp = Int(round(self.weather!.currentWeather.temperature.value))
+                    self.currentWeatherVisibility = Int(round(self.weather!.currentWeather.visibility.value / 1000))
+                    self.currentWeatherUvIndex = self.weather!.currentWeather.uvIndex.value
+                    self.currentWeatherWindSpeed = Int(round(self.weather!.currentWeather.wind.speed.value / 3.6))
+                    self.currentWeatherWinddirection = "\(self.weather!.currentWeather.wind.compassDirection.rawValue)"
+                    print(self.currentWeatherWinddirection)
+                    self.currentWeatherApparentTemperature = Int(round(self.weather!.currentWeather.apparentTemperature.value))
+                    self.currentWeatherHumidity = Int(round(self.weather!.currentWeather.humidity * 100))
+                    self.precipitation = Int(round(self.weather!.dailyForecast[0].precipitationChance * 100))
+                    self.currentWeatherDewPoint = Int(round(self.weather!.currentWeather.dewPoint.value))
+                    
+                    //ui세팅
+                    self.currentWeatherConditionKO()
+                    self.setWeatherUI()
+                    self.weekWeatherTableView.reloadData()
+                    self.weatherCollectionView.reloadData()
+                } catch {
+                    print("error")
+                }
+            }
+        }
     }
     
     //view세팅
     func setupUI() {
         weatherView.layer.cornerRadius = 15
-//        searchBar.layer.cornerRadius = 15
         uvIndexView.layer.cornerRadius = 15
         visibilityView.layer.cornerRadius = 15
         windView.layer.cornerRadius = 15
@@ -118,11 +196,15 @@ class CurrentWeatherViewController: UIViewController {
         //오늘 날짜 표시
         let formatter = DateFormatter()
         formatter.dateFormat = "MM월 d일 (E)"
+        formatter.locale = Locale(identifier: "ko_KR")
         weatherDateLabel.text = formatter.string(from: Date())
         
-        weatherRegionLabel.text = "서울"
+        if locality != " " {
+            weatherRegionLabel.text = locality
+        } else {
+            weatherRegionLabel.text = country
+        }
     }
-    
     //현재 온도 세팅
     private func setWeatherUI() {
         //현재 날씨 뷰 세팅
@@ -164,6 +246,81 @@ class CurrentWeatherViewController: UIViewController {
         print("체감온도: \(currentWeatherApparentTemperature)")
         print("습도: \(currentWeatherHumidity)")
         print("강수확률: \(precipitation)")
+    }
+    //날씨 컨디션 케이스별 번역
+    func currentWeatherConditionKO() {
+        switch currentWeatherCondition {
+        case "blowingDust":
+            currentWeatherCondition = "먼지"
+        case "clear":
+            currentWeatherCondition = "맑음"
+        case "cloudy":
+            currentWeatherCondition = "흐림"
+        case "foggy":
+            currentWeatherCondition = "안개"
+        case "haze":
+            currentWeatherCondition = "연무"
+        case "mostlyClear":
+            currentWeatherCondition = "대체로 맑음"
+        case "mostlyCloudy":
+            currentWeatherCondition = "대체로 흐림"
+        case "partlyCloudy":
+            currentWeatherCondition = "한때 흐림"
+        case "smoky":
+            currentWeatherCondition = "연기"
+        case "breezy":
+            currentWeatherCondition = "미풍"
+        case "windy":
+            currentWeatherCondition = "바람"
+        case "drizzle":
+            currentWeatherCondition = "이슬비"
+        case "heavyRain":
+            currentWeatherCondition = "폭우"
+        case "isolatedThunderstorms":
+            currentWeatherCondition = "외딴뇌우"
+        case "rain":
+            currentWeatherCondition = "비"
+        case "sunShowers":
+            currentWeatherCondition = "소나기"
+        case "scatteredThunderstorms":
+            currentWeatherCondition = "흩어진뇌우"
+        case "strongStorms":
+            currentWeatherCondition = "폭풍"
+        case "thunderstorms":
+            currentWeatherCondition = "뇌우"
+        case "frigid":
+            currentWeatherCondition = "몹시 추움"
+        case "hail":
+            currentWeatherCondition = "우박"
+        case "hot":
+            currentWeatherCondition = "더움"
+        case "flurries":
+            currentWeatherCondition = "돌풍"
+        case "sleet":
+            currentWeatherCondition = "진눈깨비"
+        case "snow":
+            currentWeatherCondition = "눈"
+        case "sunFlurries":
+            currentWeatherCondition = "소낙눈"
+        case "wintryMix":
+            currentWeatherCondition = "눈, 비"
+        case "blizzard":
+            currentWeatherCondition = "눈보라"
+        case "blowingSnow":
+            currentWeatherCondition = "날린눈"
+        case "freezingDrizzle":
+            currentWeatherCondition = "언 진눈깨비"
+        case "freezingRain":
+            currentWeatherCondition = "얼어붙은 비"
+        case "heavySnow":
+            currentWeatherCondition = "폭설"
+        case "hurricane":
+            currentWeatherCondition = "허리케인"
+        case "tropicalStorm":
+            currentWeatherCondition = "열대 폭풍"
+        default:
+            break
+        }
     }
     //가시거리 레이블 세팅
     func visibilityExLabelSetup() {
@@ -273,29 +430,18 @@ class CurrentWeatherViewController: UIViewController {
         }
     }
     
-    //back버튼을 눌렀을때
-    @IBAction func backButtonTapped(_ sender: UIButton) {
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
     
-    var delVCNum: Int = 0
-    
-    @IBAction func deleteButtonTapped(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Notification.Name("delVC"), object: delVCNum)
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        NotificationCenter.default.post(name: Notification.Name("addVC"), object: mapItemArray)
         self.dismiss(animated: true)
     }
-}
-
-//컬렉션뷰 클래스 설정
-class WeatherCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var weatherCollectionImage: UIImageView!
-    @IBOutlet weak var weatherCollectionDate: UILabel!
-    @IBOutlet weak var weatherCollectionTemp: UILabel!
 }
 
 //컬렉션뷰 설정
-extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SearchWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //컬랙션뷰 셀 갯수 설정
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 24
@@ -309,7 +455,6 @@ extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionVi
         
         for i in 1...23 {
             hourArray.insert(String(currentHour.component(.hour, from: Date(timeIntervalSinceNow: 3600 * Double(i)))) + "시", at: i)
-            //            simbalArray.insert(weather!.dailyForecast[i - 1].symbolName, at: i - 1)
         }
         
         cell.weatherCollectionDate.text = hourArray[indexPath.row]
@@ -325,7 +470,7 @@ extension CurrentWeatherViewController: UICollectionViewDelegate, UICollectionVi
 }
 
 //테이블뷰 설정
-extension CurrentWeatherViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchWeatherViewController: UITableViewDelegate, UITableViewDataSource {
     //테이블뷰 셀 갯수 설정
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
@@ -337,6 +482,7 @@ extension CurrentWeatherViewController: UITableViewDelegate, UITableViewDataSour
         let formatter = DateFormatter()
         //요일만 나오도록 설정
         formatter.dateFormat = "EEE"
+        formatter.locale = Locale(identifier: "ko_KR")
         //오늘은 오늘이라고 설정하고 나머지는 요일로 나타내는 배열
         var weekDayArray: [String] = ["오늘"]
         for i in 1...9 {

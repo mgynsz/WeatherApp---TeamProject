@@ -21,7 +21,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var otherOptionView: UIView!
     //테이블뷰
     @IBOutlet weak var weekWeatherTableView: UITableView!
-
+    //스크롤뷰
+    @IBOutlet weak var scrollView: UIScrollView!
     
     
     //서울의 좌표
@@ -62,26 +63,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //위치 업데이트
         locationManager.startUpdatingLocation()
         
-        //weatherkit 사용
-        let weatherService = WeatherService.shared
-        
-        DispatchQueue.main.async {
-            Task {
-                do {
-                    self.weather = try await weatherService.weather(for: self.seoul)
-                    //10일간 날씨 받아오기
-                    for i in 0...9 {
-                        self.weekWeatherMaxTempArray.append(Int(round(self.weather!.dailyForecast[i].highTemperature.value)))
-                        self.weekWeatherMinTempArray.append(Int(round(self.weather!.dailyForecast[i].lowTemperature.value)))
-                        self.weekWeatherSymbolArray.append(self.weather!.dailyForecast[i].symbolName)
-                    }
-                    
-                    //ui세팅
-                    self.weekWeatherTableView.reloadData()
-                } catch {
-                    print("error")
-                }
-            }
+        reloadView()
+        runWeatherKit()
+    }
+    //새로고침 함수
+    func reloadView() {
+        scrollView.refreshControl = UIRefreshControl()
+        scrollView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+    }
+    //새로고침 동작
+    @objc func handleRefreshControl() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            self.scrollView.refreshControl?.endRefreshing()
+            self.weekWeatherTableView.reloadData()
         }
     }
     
@@ -100,6 +94,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //                print("error")
         //            }
         //        }
+    }
+    
+    func runWeatherKit() {
+        //weatherkit 사용
+        let weatherService = WeatherService.shared
+        
+        DispatchQueue.main.async {
+            Task {
+                do {
+                    self.weather = try await weatherService.weather(for: self.seoul)
+                    //초기화
+                    self.weekWeatherMaxTempArray = []
+                    self.weekWeatherMinTempArray = []
+                    self.weekWeatherSymbolArray = []
+                    //10일간 날씨 받아오기
+                    for i in 0...9 {
+                        self.weekWeatherMaxTempArray.append(Int(round(self.weather!.dailyForecast[i].highTemperature.value)))
+                        self.weekWeatherMinTempArray.append(Int(round(self.weather!.dailyForecast[i].lowTemperature.value)))
+                        self.weekWeatherSymbolArray.append(self.weather!.dailyForecast[i].symbolName)
+                    }
+                    
+                    //ui세팅
+                    self.weekWeatherTableView.reloadData()
+                } catch {
+                    print("error")
+                }
+            }
+        }
     }
     
     func setupUI() {

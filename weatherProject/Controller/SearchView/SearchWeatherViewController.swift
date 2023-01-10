@@ -63,8 +63,6 @@ class SearchWeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var weekWeatherTableView: UITableView!
     
     //지역정보
-    var locality = ""
-    var country = ""
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     var mapItemArray: [String] = []
@@ -121,6 +119,8 @@ class SearchWeatherViewController: UIViewController, CLLocationManagerDelegate {
         //위치 업데이트
         locationManager.startUpdatingLocation()
         
+        latitude = Double(mapItemArray[2])!
+        longitude = Double(mapItemArray[3])!
         //날씨세팅
         setWeatherUI()
         runWeatherKit(latitude: latitude, longitude: longitude)
@@ -199,10 +199,10 @@ class SearchWeatherViewController: UIViewController, CLLocationManagerDelegate {
         formatter.locale = Locale(identifier: "ko_KR")
         weatherDateLabel.text = formatter.string(from: Date())
         
-        if locality != " " {
-            weatherRegionLabel.text = locality
+        if mapItemArray[0] != " " {
+            weatherRegionLabel.text = mapItemArray[0]
         } else {
-            weatherRegionLabel.text = country
+            weatherRegionLabel.text = mapItemArray[1]
         }
     }
     //현재 온도 세팅

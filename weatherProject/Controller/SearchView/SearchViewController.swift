@@ -49,10 +49,7 @@ extension SearchViewController: SearchResultDelegate {
         let mapItemArray: [String] = [locality, country, latitude, longitude]
         
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SearchWeatherViewController") as? SearchWeatherViewController else {return}
-        nextVC.locality = locality
-        nextVC.country = country
-        nextVC.latitude = Double(latitude)!
-        nextVC.longitude = Double(latitude)!
+        
         nextVC.mapItemArray = mapItemArray
         
         self.present(nextVC, animated: true)

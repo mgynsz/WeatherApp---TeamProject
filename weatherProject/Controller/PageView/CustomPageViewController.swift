@@ -23,6 +23,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
                 (view as! UIPageControl).setIndicatorImage(UIImage(systemName: "plus"), forPage: 0)
                 (view as! UIPageControl).currentPage = 1
                 (view as! UIPageControl).numberOfPages = individualPageViewControllerList.count
+                (view as! UIPageControl).isUserInteractionEnabled = false
             }
         }
     }
@@ -58,7 +59,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         if let mapItemArray = notification.object as? [String] {
             print(mapItemArray)
             individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItemArray[0], country: mapItemArray[1], latitude: mapItemArray[2], longitude: mapItemArray[3]))
-            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
+            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
         }
     }
     //삭제 함수
@@ -66,7 +67,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         if let addString = notification.object as? String {
             print(addString)
             individualPageViewControllerList.remove(at: individualPageViewControllerList.count - 1)
-            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true)
+            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
         }
     }
 }

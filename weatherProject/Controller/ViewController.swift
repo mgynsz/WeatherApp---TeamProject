@@ -14,7 +14,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tempLabel: UILabel!
     //작년 날씨 뷰
     @IBOutlet weak var LYtempView: UIView!
-    @IBOutlet weak var LYWeatherLabel: UILabel!
     //캘린더 뷰
     @IBOutlet weak var calenderView: UIView!
     //기능 뷰

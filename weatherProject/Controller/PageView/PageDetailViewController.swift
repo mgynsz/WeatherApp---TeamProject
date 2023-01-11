@@ -57,6 +57,8 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
     var country = ""
     var latitude: Double = 0.0
     var longitude: Double = 0.0
+    //인덱스
+    var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,6 +196,7 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
             vc.currentWeatherHumidity = self.currentWeatherHumidity
             vc.currentWeatherDewPoint = self.currentWeatherDewPoint
             vc.precipitation = self.precipitation
+            vc.index = self.index
         }
     }
     
@@ -273,14 +276,16 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    static func getInstance(locality: String, country: String, latitude: String, longitude: String) -> PageDetailViewController {
+    static func getInstance(locality: String, country: String, latitude: String, longitude: String, index: Int) -> PageDetailViewController {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PageDetailViewController") as! PageDetailViewController
+        let pvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CustomPageViewController") as! CustomPageViewController
         
         vc.locality = locality
         vc.country = country
         vc.latitude = Double(latitude)!
         vc.longitude = Double(longitude)!
+        vc.index = index
         
         return vc
     }

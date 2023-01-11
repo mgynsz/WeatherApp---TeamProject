@@ -90,7 +90,8 @@ class CurrentWeatherViewController: UIViewController {
     var currentWeatherDewPoint: Int = 0
     //강수량
     var precipitation: Int = 0
-    
+    //인덱스
+    var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -291,7 +292,7 @@ class CurrentWeatherViewController: UIViewController {
         sheet.addAction(UIAlertAction(title: "삭제", style: .destructive, handler: {_ in
             print("삭제")
             //삭제 노티피케이션 신호 보내기
-            NotificationCenter.default.post(name: Notification.Name("delVC"), object: "delete")
+            NotificationCenter.default.post(name: Notification.Name("delVC"), object: self.index)
             self.dismiss(animated: true)
         }))
         sheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: { _ in print("취소")}))

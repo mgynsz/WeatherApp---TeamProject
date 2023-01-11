@@ -12,6 +12,8 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     
     var individualPageViewControllerList = [UIViewController]()
     let pageControl = UIPageControl()
+    //현재 인덱스
+    var currentIndex = 0
     
     // 페이지컨트롤 인디케이터 상세 설정
     override func viewDidLayoutSubviews() {
@@ -48,7 +50,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
         if let defaultMapItemArray = UserDefaults.standard.array(forKey: "key") as? [[String]] {
             for i in 0..<defaultMapItemArray.count {
                 let mapItem = defaultMapItemArray[i]
-                individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItem[0], country: mapItem[1], latitude: mapItem[2], longitude: mapItem[3], index: i + 2))
+                individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItem[0], country: mapItem[1], latitude: mapItem[2], longitude: mapItem[3]))
             }
         }
         setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true, completion: nil)
@@ -64,7 +66,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     //추가 함수
     @objc func addVC(notification: NSNotification) {
         if let mapItemArray = notification.object as? [String] {
-            individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItemArray[0], country: mapItemArray[1], latitude: mapItemArray[2], longitude: mapItemArray[3], index: individualPageViewControllerList.count))
+            individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItemArray[0], country: mapItemArray[1], latitude: mapItemArray[2], longitude: mapItemArray[3]))
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
             //userDefault에 저장
             if var defaultMapItemArray = UserDefaults.standard.array(forKey: "key") as? [[String]] {
@@ -75,12 +77,12 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     }
     //삭제 함수
     @objc func delVC(notification: NSNotification) {
-        if let index = notification.object as? Int {
-            individualPageViewControllerList.remove(at: index)
+        if let _ = notification.object as? String {
+            individualPageViewControllerList.remove(at: currentIndex)
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
             //default부분 삭제
             if var defaultMapItemArray = UserDefaults.standard.array(forKey: "key") as? [[String]] {
-                defaultMapItemArray.remove(at: index - 2)
+                defaultMapItemArray.remove(at: currentIndex - 2)
                 UserDefaults.standard.set(defaultMapItemArray, forKey: "key")
             }
         }
@@ -94,8 +96,10 @@ extension CustomPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         guard let indexOfCurrentPageViewController = individualPageViewControllerList.firstIndex(of: viewController) else { return nil }
+        //현재 인덱스
+        currentIndex = indexOfCurrentPageViewController
+        print(currentIndex)
         let previousIndex = indexOfCurrentPageViewController - 1
-        
         if indexOfCurrentPageViewController == 1 {
             return individualPageViewControllerList[0]
         } else if previousIndex < 0 {
@@ -108,6 +112,9 @@ extension CustomPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         guard let currentindexOfPageViewController = individualPageViewControllerList.firstIndex(of: viewController) else { return nil }
+        //현재 인덱스
+        currentIndex = currentindexOfPageViewController
+        print(currentIndex)
         let nextIndex = currentindexOfPageViewController + 1
         
         if nextIndex == individualPageViewControllerList.count {

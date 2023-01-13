@@ -67,28 +67,28 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     @objc func addVC(notification: NSNotification) {
         if let mapItemArray = notification.object as? [String] {
             individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItemArray[0], country: mapItemArray[1], latitude: mapItemArray[2], longitude: mapItemArray[3]))
-            //현재 인덱스 업데이트
-            currentIndex = 1
-            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
             //userDefault에 저장
             if var defaultMapItemArray = UserDefaults.standard.array(forKey: "key") as? [[String]] {
                 defaultMapItemArray.append(mapItemArray)
                 UserDefaults.standard.set(defaultMapItemArray, forKey: "key")
             }
+            //현재 인덱스 업데이트
+            currentIndex = 1
+            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
         }
     }
     //삭제 함수
     @objc func delVC(notification: NSNotification) {
         if let _ = notification.object as? String {
             individualPageViewControllerList.remove(at: currentIndex)
-            //현재 인덱스 업데이트
-            currentIndex = 1
-            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
             //default부분 삭제
             if var defaultMapItemArray = UserDefaults.standard.array(forKey: "key") as? [[String]] {
                 defaultMapItemArray.remove(at: currentIndex - 2)
                 UserDefaults.standard.set(defaultMapItemArray, forKey: "key")
             }
+            //현재 인덱스 업데이트
+            currentIndex = 1
+            setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
         }
     }
 }

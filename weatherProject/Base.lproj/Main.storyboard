@@ -72,7 +72,49 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNZ-fv-yed">
                                                         <rect key="frame" x="0.0" y="0.0" width="179" height="81.5"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QU9-eM-gWa">
+                                                                <rect key="frame" x="16" y="16" width="66.5" height="49"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="작년 오늘" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXK-Zn-1en">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="66.5" height="21.5"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBd-Vh-z1N">
+                                                                        <rect key="frame" x="0.0" y="29.5" width="28" height="19.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                                        <color key="textColor" systemColor="systemGrayColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jyl-HQ-rUu">
+                                                                <rect key="frame" x="111.5" y="13" width="55.5" height="55.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="º" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Orh-QC-wMf">
+                                                                        <rect key="frame" x="22" y="0.0" width="12" height="36"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평균기온" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-sE-bsS">
+                                                                        <rect key="frame" x="0.0" y="36" width="55.5" height="19.5"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                                        <color key="textColor" systemColor="systemGrayColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="jyl-HQ-rUu" secondAttribute="trailing" constant="12" id="BI9-XW-IIQ"/>
+                                                            <constraint firstItem="jyl-HQ-rUu" firstAttribute="centerY" secondItem="jNZ-fv-yed" secondAttribute="centerY" id="GJL-XD-FBN"/>
+                                                            <constraint firstItem="QU9-eM-gWa" firstAttribute="leading" secondItem="jNZ-fv-yed" secondAttribute="leading" constant="16" id="SN8-OG-bv4"/>
+                                                            <constraint firstItem="QU9-eM-gWa" firstAttribute="top" secondItem="jNZ-fv-yed" secondAttribute="top" constant="16" id="z1S-Mi-jHA"/>
+                                                        </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="b4D-Cq-pZd">
                                                         <rect key="frame" x="195" y="0.0" width="179" height="81.5"/>
@@ -295,9 +337,11 @@
                         <outlet property="calenderView" destination="y9t-vJ-jpF" id="v4h-Q9-ztF"/>
                         <outlet property="firstview" destination="O5H-52-pQL" id="62r-W2-31z"/>
                         <outlet property="otherOptionView" destination="Q7n-hq-vGB" id="dZm-uS-6pD"/>
-                        <outlet property="scrollView" destination="gH9-ru-JbI" id="Xqh-6B-xYc"/>
                         <outlet property="tempLabel" destination="3P3-Cq-Sg7" id="Bav-f0-QLE"/>
                         <outlet property="weekWeatherTableView" destination="fD5-t7-Dsf" id="d9t-9i-8Sn"/>
+                        <outlet property="yearAvgTempLabel" destination="Orh-QC-wMf" id="G9A-Ll-vKS"/>
+                        <outlet property="yearDateLabel" destination="FXK-Zn-1en" id="p9T-AQ-3WI"/>
+                        <outlet property="yearRegionLable" destination="gBd-Vh-z1N" id="j6M-JB-USl"/>
                         <segue destination="EiK-Gc-WGF" kind="presentation" identifier="showFirstView" modalPresentationStyle="fullScreen" id="EHV-yi-9ZT"/>
                         <segue destination="1Ph-NK-gqh" kind="presentation" identifier="showCalenderView" modalPresentationStyle="pageSheet" id="gTu-C5-VCk"/>
                         <segue destination="yDM-Fs-7Hc" kind="presentation" identifier="showSearchView" id="phe-B5-UBk"/>
@@ -1394,6 +1438,9 @@
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="leY-TK-tLE">
                                 <rect key="frame" x="36" y="80" width="342" height="750"/>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="694177200">
+                                    <!--2022-12-31 11:00:00 +0000-->
+                                </date>
                                 <locale key="locale" localeIdentifier="ko_KR"/>
                             </datePicker>
                             <navigationBar contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IE8-w0-QdF">

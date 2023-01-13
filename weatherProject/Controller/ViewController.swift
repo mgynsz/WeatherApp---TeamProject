@@ -14,15 +14,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tempLabel: UILabel!
     //작년 날씨 뷰
     @IBOutlet weak var LYtempView: UIView!
+    @IBOutlet weak var yearDateLabel: UILabel!
+    @IBOutlet weak var yearRegionLable: UILabel!
+    @IBOutlet weak var yearAvgTempLabel: UILabel!
+    
     //캘린더 뷰
     @IBOutlet weak var calenderView: UIView!
     //기능 뷰
     @IBOutlet weak var otherOptionView: UIView!
     //테이블뷰
     @IBOutlet weak var weekWeatherTableView: UITableView!
-    //스크롤뷰
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     
     //서울의 좌표
     var myLocation = CLLocation(latitude: 37.5666, longitude: 126.9784)
@@ -32,7 +33,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var weekWeatherMaxTempArray: [Int] = []
     var weekWeatherMinTempArray: [Int] = []
     var weekWeatherSymbolArray: [String] = []
-    
+    //작년 날짜
+    var yearDate: Int = 0
+    //작년 지역
+    var region = "서울"
+    var regionCode: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,37 +77,67 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
         
-        reloadView()
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko")
+        formatter.dateFormat = "yyyyMMdd"
+        self.yearDate = Int(formatter.string(from: Date()))! - 10000
+        self.regionCode = 108
+        
         runWeatherKit()
+        yearWeatherData(regionCode: regionCode, date: yearDate)
+        setDateNotiObserver()
+        setRegionNotiObserver()
     }
-    //새로고침 함수
-    func reloadView() {
-        scrollView.refreshControl = UIRefreshControl()
-        scrollView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+    
+    //날짜 설정 노티피케이션 옵져버
+    private func setDateNotiObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setDatefunc), name: NSNotification.Name("setDate"), object: nil)
     }
-    //새로고침 동작
-    @objc func handleRefreshControl() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-            self.scrollView.refreshControl?.endRefreshing()
-            self.weekWeatherTableView.reloadData()
+    
+    //지역 설정 노티피케이션 옵져버
+    private func setRegionNotiObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setRegionfunc), name: NSNotification.Name("setRegion"), object: nil)
+    }
+    
+    //날짜 설정 함수
+    @objc func setDatefunc(notification: NSNotification) {
+        if let date = notification.object as? Int {
+            self.yearDate = date
+            yearWeatherData(regionCode: self.regionCode, date: self.yearDate)
+            //날짜 8자리를 6자리로 자르기
+            let yearDateText = "\(self.yearDate)"
+            let startIndex = yearDateText.index(yearDateText.startIndex, offsetBy: 2)// 사용자지정 시작인덱스
+            let endIndex = yearDateText.index(yearDateText.startIndex, offsetBy: 8)// 사용자지정 끝인덱스
+            let sliced_yearDateText = yearDateText[startIndex ..< endIndex]
+            self.yearDateLabel.text = "\(sliced_yearDateText)"
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    //지역 설정 함수
+    @objc func setRegionfunc(notification: NSNotification) {
+        if let regionList = notification.object as? [String] {
+            self.region = regionList[0]
+            self.regionCode = Int(regionList[1])!
+            yearWeatherData(regionCode: self.regionCode, date: self.yearDate)
+            self.yearRegionLable.text = self.region
+        }
+    }
+    //작년날씨 데이터 요청
+    @objc func yearWeatherData(regionCode: Int, date: Int) {
         // data fetch(데이터 요청)
-        //        WeatherService().getWeather { result in
-        //            switch result {
-        //            case .success(let weatherResponse):
-        //                DispatchQueue.main.async {
-        //                    self.weather = weatherResponse.weather.first
-        //                    self.main = weatherResponse.main
-        //                    self.name = weatherResponse.name
-        //                    self.setWeatherUI()
-        //                }
-        //            case .failure(_ ):
-        //                print("error")
-        //            }
-        //        }
+        YearWeatherService().getWeather(regionCode: regionCode, date: date) { result in
+            switch result {
+            case .success(let weatherResponse):
+                DispatchQueue.main.async {
+                    let array = weatherResponse.response.body.items.item
+                    let itemList = array[0]
+                    let yearAvgTemp = Double(itemList["avgTa"]!)!
+                    self.yearAvgTempLabel.text = "\(Int(round(yearAvgTemp)))º"
+                }
+            case .failure(_ ):
+                print("error")
+            }
+        }
     }
     
     func runWeatherKit() {

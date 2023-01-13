@@ -22,8 +22,9 @@ class CalenderViewController: UIViewController {
     @IBAction func selectButtonTapped(_ sender: UIButton) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
-        
-        print(formatter.string(from: datePicker.date))
+        //날짜 정보 설정
+        var date = Int(formatter.string(from: datePicker.date))!
+        NotificationCenter.default.post(name: Notification.Name("setDate"), object: date)
         self.dismiss(animated: true)
     }
 }

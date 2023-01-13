@@ -38,6 +38,11 @@ class SearchViewController: UIViewController {
         
         backgroundView.addSubview(searchBar)
     }
+    
+    
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
 }
 
 extension SearchViewController: SearchResultDelegate {

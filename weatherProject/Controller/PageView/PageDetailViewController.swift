@@ -167,6 +167,7 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
     //현재 날씨 뷰를 눌렀을 때
     @objc func weatherViewTapped(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "showCurrentWeatherView", sender: sender)
+        
     }
     
     //currnetViewController로 데이터 전송

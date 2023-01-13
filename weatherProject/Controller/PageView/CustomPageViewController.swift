@@ -13,7 +13,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     var individualPageViewControllerList = [UIViewController]()
     let pageControl = UIPageControl()
     //현재 인덱스
-    var currentIndex = 0
+    var currentIndex = 1
     
     // 페이지컨트롤 인디케이터 상세 설정
     override func viewDidLayoutSubviews() {
@@ -23,7 +23,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
                 (view as! UIPageControl).currentPageIndicatorTintColor = .black
                 (view as! UIPageControl).pageIndicatorTintColor = .gray
                 (view as! UIPageControl).setIndicatorImage(UIImage(systemName: "plus"), forPage: 0)
-                (view as! UIPageControl).currentPage = 1
+                (view as! UIPageControl).currentPage = currentIndex
                 (view as! UIPageControl).numberOfPages = individualPageViewControllerList.count
                 (view as! UIPageControl).isUserInteractionEnabled = false
             }
@@ -53,7 +53,7 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
                 individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItem[0], country: mapItem[1], latitude: mapItem[2], longitude: mapItem[3]))
             }
         }
-        setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: true, completion: nil)
+        setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false, completion: nil)
     }
     //날씨카드 추가 노티피케이션 옵져버
     private func addNotiObserver() {
@@ -67,6 +67,8 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     @objc func addVC(notification: NSNotification) {
         if let mapItemArray = notification.object as? [String] {
             individualPageViewControllerList.append(PageDetailViewController.getInstance(locality: mapItemArray[0], country: mapItemArray[1], latitude: mapItemArray[2], longitude: mapItemArray[3]))
+            //현재 인덱스 업데이트
+            currentIndex = 1
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
             //userDefault에 저장
             if var defaultMapItemArray = UserDefaults.standard.array(forKey: "key") as? [[String]] {
@@ -79,6 +81,8 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDelega
     @objc func delVC(notification: NSNotification) {
         if let _ = notification.object as? String {
             individualPageViewControllerList.remove(at: currentIndex)
+            //현재 인덱스 업데이트
+            currentIndex = 1
             setViewControllers([individualPageViewControllerList[1]], direction: .forward, animated: false)
             //default부분 삭제
             if var defaultMapItemArray = UserDefaults.standard.array(forKey: "key") as? [[String]] {

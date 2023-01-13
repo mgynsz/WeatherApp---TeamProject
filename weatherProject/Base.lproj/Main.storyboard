@@ -1295,9 +1295,16 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffd-zJ-LxT">
-                                <rect key="frame" x="0.0" y="56" width="414" height="782"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="yHf-mz-iDH"/>
+                                </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VBs-u7-FTj">
+                                <rect key="frame" x="0.0" y="116" width="414" height="722"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b8s-qV-T0U"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1305,10 +1312,13 @@
                             <constraint firstItem="wr1-uJ-1ga" firstAttribute="top" secondItem="25T-iA-3Cm" secondAttribute="top" id="3cH-sQ-bIj"/>
                             <constraint firstItem="wr1-uJ-1ga" firstAttribute="leading" secondItem="25T-iA-3Cm" secondAttribute="leading" id="F7B-Wc-Zz6"/>
                             <constraint firstItem="ffd-zJ-LxT" firstAttribute="top" secondItem="wr1-uJ-1ga" secondAttribute="bottom" id="QBl-5P-hfw"/>
+                            <constraint firstItem="b8s-qV-T0U" firstAttribute="bottom" secondItem="VBs-u7-FTj" secondAttribute="bottom" id="WZz-9K-ATS"/>
                             <constraint firstItem="ffd-zJ-LxT" firstAttribute="leading" secondItem="b8s-qV-T0U" secondAttribute="leading" id="bxJ-oh-hTS"/>
                             <constraint firstAttribute="trailing" secondItem="wr1-uJ-1ga" secondAttribute="trailing" id="hzA-XA-UzR"/>
-                            <constraint firstItem="b8s-qV-T0U" firstAttribute="bottom" secondItem="ffd-zJ-LxT" secondAttribute="bottom" id="o1J-OU-54t"/>
+                            <constraint firstItem="VBs-u7-FTj" firstAttribute="top" secondItem="ffd-zJ-LxT" secondAttribute="bottom" id="pKJ-yx-638"/>
                             <constraint firstItem="b8s-qV-T0U" firstAttribute="trailing" secondItem="ffd-zJ-LxT" secondAttribute="trailing" id="qxl-7h-Z4B"/>
+                            <constraint firstItem="b8s-qV-T0U" firstAttribute="trailing" secondItem="VBs-u7-FTj" secondAttribute="trailing" id="xqf-E4-riW"/>
+                            <constraint firstItem="VBs-u7-FTj" firstAttribute="leading" secondItem="b8s-qV-T0U" secondAttribute="leading" id="y0p-qp-3fc"/>
                         </constraints>
                     </view>
                     <connections>

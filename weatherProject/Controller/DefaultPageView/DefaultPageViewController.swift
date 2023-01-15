@@ -21,10 +21,10 @@ class DefaultPageViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var weatherMaxTempLabel: UILabel!
     @IBOutlet weak var weatherMinTempLabel: UILabel!
     
-    let latitude = 37.5666
-    let longitude = 126.9784
     //서울의 좌표
-    lazy var seoul = CLLocation(latitude: latitude, longitude: longitude)
+    var myLocation = CLLocation(latitude: 37.5666, longitude: 126.9784)
+    //위치
+    var location = ""
     //날씨 데이터 저장
     var weather: Weather?
     //날씨 컨디션 저장
@@ -72,19 +72,27 @@ class DefaultPageViewController: UIViewController, CLLocationManagerDelegate {
         //위치 매니저 생성 및 설정
         let locationManager = CLLocationManager()
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
         //위치 정확도
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //위치 업데이트
-        locationManager.startUpdatingLocation()
-        
+        //현재위치 받아오기
+        DispatchQueue.global().async {
+            // 위치 사용을 허용하면 현재 위치 정보를 가져옴
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.startUpdatingLocation()
+                self.myLocation = CLLocation(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
+                self.location = "나의 위치"
+            }
+            else {
+                self.location = "서울"
+            }
+        }
         //weatherkit 사용
         let weatherService = WeatherService.shared
         
         DispatchQueue.main.async {
             Task {
                 do {
-                    self.weather = try await weatherService.weather(for: self.seoul)
+                    self.weather = try await weatherService.weather(for: self.myLocation)
                     //10일간 날씨 받아오기
                     for i in 0...9 {
                         self.weekWeatherMaxTempArray.append(Int(round(self.weather!.dailyForecast[i].highTemperature.value)))
@@ -180,6 +188,7 @@ class DefaultPageViewController: UIViewController, CLLocationManagerDelegate {
             vc.currentWeatherHumidity = self.currentWeatherHumidity
             vc.currentWeatherDewPoint = self.currentWeatherDewPoint
             vc.precipitation = self.precipitation
+            vc.location = self.location
         }
     }
     

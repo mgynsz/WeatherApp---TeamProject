@@ -61,6 +61,8 @@ class DefaultCurrentWeatherViewController: UIViewController {
     //테이블뷰
     @IBOutlet weak var weekWeatherTableView: UITableView!
     
+    //위치
+    var location = ""
     //날씨 컨디션 저장
     var currentWeatherCondition = ""
     //시간당 온도

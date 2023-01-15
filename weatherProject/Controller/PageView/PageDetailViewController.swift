@@ -71,11 +71,8 @@ class PageDetailViewController: UIViewController, CLLocationManagerDelegate {
         //위치 매니저 생성 및 설정
         let locationManager = CLLocationManager()
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
         //위치 정확도
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //위치 업데이트
-        locationManager.startUpdatingLocation()
         
         runWeatherKit(latitude: latitude, longitude: longitude)
     }

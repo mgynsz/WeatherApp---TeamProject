@@ -73,7 +73,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 self.myLocation = CLLocation(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
             }
             else {
-                print("위치 서비스 허용 off")
+                print("위치 서비스 허용 꺼짐")
             }
         }
         
@@ -130,7 +130,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             case .success(let weatherResponse):
                 DispatchQueue.main.async {
                     let array = weatherResponse.response.body.items.item
+                    //받아온 데이터 저장
                     let itemList = array[0]
+                    //평균 온도 데이터 저장
                     let yearAvgTemp = Double(itemList["avgTa"]!)!
                     self.yearAvgTempLabel.text = "\(Int(round(yearAvgTemp)))º"
                 }

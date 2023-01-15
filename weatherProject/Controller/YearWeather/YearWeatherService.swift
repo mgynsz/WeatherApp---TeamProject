@@ -20,7 +20,7 @@ class YearWeatherService {
         get {
             // 생성한 .plist 파일 경로 불러오기
             guard let filePath = Bundle.main.path(forResource: "keyList", ofType: "plist") else {
-                fatalError("Couldn't find file 'KeyList.plist'.")
+                fatalError("'KeyList.plist'을 찾을 수 없습니다.")
             }
             
             // .plist를 딕셔너리로 받아오기
@@ -28,7 +28,7 @@ class YearWeatherService {
             
             // 딕셔너리에서 값 찾기
             guard let value = plist?.object(forKey: "YEARWEATHER_KEY") as? String else {
-                fatalError("Couldn't find key 'OPENWEATHERMAP_KEY' in 'KeyList.plist'.")
+                fatalError("'KeyList.plist' 내에서 'YEARWEATHER_KEY' ket를 찾을 수 없습니다.")
             }
             return value
         }
